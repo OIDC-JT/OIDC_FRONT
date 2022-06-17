@@ -132,7 +132,7 @@ function App() {
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "analysis" style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName()}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_1">
@@ -177,7 +177,7 @@ function App() {
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "analysis" style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName()}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_2">
@@ -193,15 +193,15 @@ function App() {
         for (let i = 0; i < azuTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
-            html += '<td><input type="number" min=0></input></td>'
-            html += '<td><input type="number" min=0></input></td>'
-            html += '<td><input type="number" step=0.1 min=0></input></td>'
-            html += '<td><input type="number" step=0.1 min=0></input></td>'
+            html += '<td><input type="number" min=0 id = input_id'+ Number(4*i) + '></input></td>'
+            html += '<td><input type="number" min=0 id = input_id'+ Number(4*i+1) +'></input></td>'
+            html += '<td><input type="number" step=0.1 min=0 id = input_id'+ Number(4*i+2) +'></input></td>'
+            html += '<td><input type="number" step=0.1 min=0 id = input_id'+ Number(4*i+3) +'></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6></p6></td>'
-            html += '<td><p6></p6></td>'
-            html += '<td><p6></p6></td>'
-            html += '<td><p6></p6></td>'
+            html += '<td><p6 id = output_id'+ Number(4*i) + '></p6></td>'
+            html += '<td><p6 id = output_id'+ Number(4*i+1) + '></p6></td>'
+            html += '<td><p6 id = output_id'+ Number(4*i+2) + '></p6></td>'
+            html += '<td><p6 id = output_id'+ Number(4*i+3) + '></p6></td>'
             html += '</tr>'
 
             console.log(html);
@@ -222,7 +222,7 @@ function App() {
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "analysis" style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName()}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">
@@ -234,6 +234,14 @@ function App() {
     else{
         content = <article>위 항목을 먼저 선택해주세요.</article>
     }
+
+   
+    function printName()  {
+        for (let i = 0; i < azuTable*4; i++) {
+            const name = document.getElementById("input_id" + i ).value;
+            document.getElementById("output_id" + i).innerText = name;
+        } 
+      }
 
     return (
     <div className="App">
