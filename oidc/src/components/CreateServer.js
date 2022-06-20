@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from "react";
 import Table from 'react-bootstrap/Table';
 import $ from "jquery";
+import Select from 'react-select'
 import { Component } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled from "styled-components";
 
 
 function Footer() {
@@ -27,7 +29,6 @@ function Nav() {
             
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
@@ -57,12 +58,14 @@ function CreateServer(){
         }
       };
 
+ 
     const SelectBox = (props) => {
         //console.log(props.options);
         return (
           <select onChange={handleChange} value = {mode} >
              {props.options.map((option) => (
-                <option
+                <option 
+                   
                    value={option.value}
                    defaultValue={props.defaultValue === option.value}
                 >
@@ -82,12 +85,11 @@ function CreateServer(){
 
       const OPTIONS = [
         { id: 1, value: "미선택", name: "미선택"},
-        { id: 2, value: "AWS", name: "AWS" },
-        { id: 3, value: "NBP", name: "NBP" },
+        { id: 2, value: "AWS", name: "AWS"},
+        { id: 3, value: "NBP", name: "NBP"},
         { id: 4, value: "Azure", name: "Azure"},
      ]
-     
-     
+
     let content = null;
     if (mode === 'AWS') {
         $("#dynamicTbody_2").empty()
@@ -115,14 +117,14 @@ function CreateServer(){
         
         <article>
             <div>
-                 <button classname = "addList" onClick={function() { 
+                 <button className = "example_c" onClick={function() { 
                         awsState(awsTable + 1); 
                  }}>추가하기</button>
             </div>      
             <table className = "table">
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th> 
-                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_1">
@@ -157,14 +159,14 @@ function CreateServer(){
         
         <article>
             <div>
-                 <button classname = "addList" onClick={function() { 
+                 <button className = "example_c" onClick={function() { 
                         nbpState(nbpTable + 1); 
                  }}>추가하기</button>
             </div>      
             <table className = "table">
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th>
-                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_2">
@@ -199,14 +201,14 @@ function CreateServer(){
         
         <article>
             <div>
-                 <button classname = "addList" onClick={function() { 
+                 <button className = "example_c" onClick={function() { 
                         azuState(azuTable + 1); 
                  }}>추가하기</button>
             </div>      
             <table className = "table">
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th>
-                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">
@@ -308,7 +310,7 @@ function CreateServer(){
                             <div>
                            원하는 Cloud Service Provider를 선택해주세요.
                         </div>
-                            <SelectBox id = 'select' options={OPTIONS} value={OPTIONS.value} selected={OPTIONS.id === OPTIONS.value} ></SelectBox>
+                            <SelectBox id = 'select' options={OPTIONS}  value={OPTIONS.value} selected={OPTIONS.id === OPTIONS.value} ></SelectBox>
                         <div>
                             사용 중인 서버의 환경을 입력해주세요.
                         </div>

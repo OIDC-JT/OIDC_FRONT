@@ -27,7 +27,6 @@ function Nav() {
             
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
@@ -117,7 +116,7 @@ function MigHelper() {
         
         <article>
             <div>
-                 <button classname = "addList" onClick={function() { 
+                 <button className = "example_c" onClick={function() { 
                         awsState(awsTable + 1); 
                  }}>추가하기</button>
             </div>      
@@ -125,7 +124,7 @@ function MigHelper() {
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_1">
@@ -162,7 +161,7 @@ function MigHelper() {
         
         <article>
             <div>
-                 <button classname = "addList" onClick={function() { 
+                 <button className = "example_c" onClick={function() { 
                         nbpState(nbpTable + 1); 
                  }}>추가하기</button>
             </div>      
@@ -170,7 +169,7 @@ function MigHelper() {
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_2">
@@ -207,7 +206,7 @@ function MigHelper() {
         
         <article>
             <div>
-                 <button classname = "addList" onClick={function() { 
+                 <button className = "example_c" onClick={function() { 
                         azuState(azuTable + 1); 
                  }}>추가하기</button>
             </div>      
@@ -215,7 +214,7 @@ function MigHelper() {
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "analysis" onClick = {function(){printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">
