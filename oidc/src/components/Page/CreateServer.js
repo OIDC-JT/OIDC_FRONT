@@ -179,7 +179,7 @@ function CreateServer(){
             <table className = "table">
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th>
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(azuTable)}}>분석하기</button></th><th>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">

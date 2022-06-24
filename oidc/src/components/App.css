@@ -2,12 +2,31 @@
 
 }
 
-
-
 /* 버튼 == example_c */
 .container-name {
   margin-left: 30px;
   margin-top: 60px;
+}
+
+.table .example_c {
+  font-style: bold;
+  font-family: 'Open Sans';
+  color: #494949;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ffffff;
+  padding: 2px;
+  border: 4px solid #494949;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+  
+}
+
+.table .example_c:hover {
+  color: #ffffff;
+  background: #212529;
+  border-color: #212529;
+  transition: all 0.4s ease 0s;
 }
 
 .example_c {
