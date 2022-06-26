@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Info from './components/Info';
-import MigHelper from './components/MigHelper';
-import CreateServer from './components/CreateServer';
+import Info from './components/Page/Info';
+import MigHelper from './components/Page/MigHelper';
+import CreateServer from './components/Page/CreateServer';
 
 
 const App = () => {
