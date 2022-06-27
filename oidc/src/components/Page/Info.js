@@ -6,10 +6,7 @@ import Footer from '../footer';
 import Navbar from '../navBar';
 import SideMenu from '../sideMenu'
 import React, { useEffect, useState } from "react";
-import Table from 'react-bootstrap/Table';
 import $ from "jquery";
-import { Component } from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function Info(){
     return (
