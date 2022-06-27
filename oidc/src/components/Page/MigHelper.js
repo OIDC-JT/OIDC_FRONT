@@ -62,7 +62,7 @@ function MigHelper() {
     if (mode === 'AWS') {
         $("#dynamicTbody_2").empty()
         $("#dynamicTbody_3").empty()
-        console.log(awsTable)
+        //console.log(awsTable)
         for (let i = 0; i < awsTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
@@ -79,7 +79,7 @@ function MigHelper() {
             html += '</tr>'
             html += '</tr>'
 
-            console.log(html);
+            //console.log(html);
         }
         $("#dynamicTbody_1").append(html);
 
@@ -109,14 +109,14 @@ function MigHelper() {
     else if (mode === 'NBP') {
         $("#dynamicTbody_1").empty()
         $("#dynamicTbody_3").empty()
-        console.log(nbpTable)
+        //console.log(nbpTable)
         for (let i = 0; i < nbpTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
-            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i) + '></input></td>'
-            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i+1) +'></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+2) +'></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+3) +'></input></td>'
+            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
+            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i+1) +' style = "width:70px"</input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+2) +' style = "width:180px"></input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+3) +' style = "width:180px"></input></td>'
             html += '<td><p6></p6></td>'
             html += '<td><p6 id = nbp_output_id'+ Number(5*i) + '></p6></td>'
             html += '<td><p6 id = nbp_output_id'+ Number(5*i+1) + '></p6></td>'
@@ -125,7 +125,7 @@ function MigHelper() {
             html += '<td><p6 id = nbp_output_id'+ Number(5*i+4) + '></p6></td>'
             html += '</tr>'
 
-            console.log(html);
+            //console.log(html);
         }
         $("#dynamicTbody_2").append(html);
 
@@ -144,7 +144,7 @@ function MigHelper() {
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
                 <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){nbp_printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>DISK<br></br>(Storage)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '150px'}}>DISK<br></br>(Storage)</th><th style={{width : '150px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_2">
                 
@@ -155,23 +155,23 @@ function MigHelper() {
     else if (mode === 'Azure') {
         $("#dynamicTbody_1").empty()
         $("#dynamicTbody_2").empty()
-        console.log(azuTable)
+        //console.log(azuTable)
         for (let i = 0; i < azuTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
-            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i) + '></input></td>'
-            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i+1) +'></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+2) +'></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+3) +'></input></td>'
+            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
+            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i+1) +' style = "width:70px"></input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+2) +' style = "width:180px"></input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+3) +' style = "width:180px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = azure_output_id'+ Number(5*i) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i) + ' ></p6></td>'
             html += '<td><p6 id = azure_output_id'+ Number(5*i+1) + '></p6></td>'
             html += '<td><p6 id = azure_output_id'+ Number(5*i+2) + '></p6></td>'
             html += '<td><p6 id = azure_output_id'+ Number(5*i+3) + '></p6></td>'
             html += '<td><p6 id = azure_output_id'+ Number(5*i+4) + '></p6></td>'
             html += '</tr>'
 
-            console.log(html);
+            //console.log(html);
         }
         $("#dynamicTbody_3").append(html);
 
@@ -190,10 +190,9 @@ function MigHelper() {
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
                 <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
                 <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){azure_printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>DISK<br></br>(Storage)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '150px'}}>DISK<br></br>(Storage)</th><th style={{width : '150px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">
-                
             </tbody>
             </table>
         </article>

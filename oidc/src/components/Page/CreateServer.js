@@ -4,13 +4,8 @@ import Navbar from '../navBar';
 import Footer from '../footer';
 import SideMenu from '../sideMenu';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useEffect, useState } from "react";
-import Table from 'react-bootstrap/Table';
+import React, {useState } from "react";
 import $ from "jquery";
-import Select from 'react-select'
-import { Component } from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import styled from "styled-components";
 
 function CreateServer(){
     const handleChange = (e) => {
@@ -65,20 +60,21 @@ function CreateServer(){
     if (mode === 'AWS') {
         $("#dynamicTbody_2").empty()
         $("#dynamicTbody_3").empty()
-        console.log(awsTable)
+        //console.log(awsTable)
         for (let i = 0; i < awsTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
-            html += '<td><input type="number" min=0 id = input_id'+ Number(2*i) + '></input></td>'
-            html += '<td><input type="number" min=0 id = input_id'+ Number(2*i+1) +'></input></td>'
+            html += '<td><input type="number" min=0 id = aws_input_id'+ Number(2*i) + ' style = "width:100px" ></input></td>'
+            html += '<td><input type="number" min=0 id = aws_input_id'+ Number(2*i+1) +' style = "width:100px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+1) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+2) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+3) + '></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i) + '></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+1) + '></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+2) + '></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+3) + '></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+4) + '></p6></td>'
             html += '</tr>'
 
-            console.log(html);
+            //console.log(html);
         }
         $("#dynamicTbody_1").append(html);
 
@@ -95,8 +91,8 @@ function CreateServer(){
             <table className = "table">
               <thead>  
                 <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th> 
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){aws_printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '80px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>DISK<br></br>(Storage)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_1">
                 
@@ -107,20 +103,21 @@ function CreateServer(){
     else if (mode === 'NBP') {
         $("#dynamicTbody_1").empty()
         $("#dynamicTbody_3").empty()
-        console.log(nbpTable)
+        //console.log(nbpTable)
         for (let i = 0; i < nbpTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
-            html += '<td><input type="number" min=0 id = input_id'+ Number(2*i) + '></input></td>'
-            html += '<td><input type="number" min=0 id = input_id'+ Number(2*i+1) +'></input></td>'
+            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(2*i) + ' style = "width:100px" ></input></td>'
+            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(2*i+1) +' style = "width:100px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+1) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+2) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+3) + '></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i) + '></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+1) + '></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+2) + '></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+3) + '></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+4) + '></p6></td>'
             html += '</tr>'
 
-            console.log(html);
+            //console.log(html);
         }
         $("#dynamicTbody_2").append(html);
 
@@ -136,9 +133,9 @@ function CreateServer(){
             </div>      
             <table className = "table">
               <thead>  
-                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th>
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th> 
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){nbp_printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '80px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>DISK<br></br>(Storage)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_2">
                 
@@ -149,20 +146,21 @@ function CreateServer(){
     else if (mode === 'Azure') {
         $("#dynamicTbody_1").empty()
         $("#dynamicTbody_2").empty()
-        console.log(azuTable)
+        //console.log(azuTable)
         for (let i = 0; i < azuTable; i++) {    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
-            html += '<td><input type="number" min=0 id = input_id'+ Number(2*i) + '></input></td>'
-            html += '<td><input type="number" min=0 id = input_id'+ Number(2*i+1) +'></input></td>'
+            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(2*i) + ' style = "width:100px" ></input></td>'
+            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(2*i+1) +' style = "width:100px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+1) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+2) + '></p6></td>'
-            html += '<td><p6 id = output_id'+ Number(2*i+3) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+1) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+2) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+3) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+4) + '></p6></td>'
             html += '</tr>'
 
-            console.log(html);
+            //console.log(html);
         }
         $("#dynamicTbody_3").append(html);
 
@@ -178,9 +176,9 @@ function CreateServer(){
             </div>      
             <table className = "table">
               <thead>  
-                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th>
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){printName(azuTable)}}>분석하기</button></th><th>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th> 
+                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){azure_printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '80px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '100px'}}>DISK<br></br>(Storage)</th><th style={{width : '100px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">
                 
@@ -193,10 +191,24 @@ function CreateServer(){
     }
 
    
-    function printName(Table)  {
+    function aws_printName(Table)  {
         for (let i = 0; i < Table*2; i++) {
-            const name = document.getElementById("input_id" + i ).value;
-            document.getElementById("output_id" + i).innerText = name;
+            const name = document.getElementById("aws_input_id" + i ).value;
+            document.getElementById("aws_output_id" + i).innerText = name;
+        } 
+      }
+    
+      function nbp_printName(Table)  {
+        for (let i = 0; i < Table*2; i++) {
+            const name = document.getElementById("nbp_input_id" + i ).value;
+            document.getElementById("nbp_output_id" + i).innerText = name;
+        } 
+      }
+    
+      function azure_printName(Table)  {
+        for (let i = 0; i < Table*2; i++) {
+            const name = document.getElementById("azure_input_id" + i ).value;
+            document.getElementById("azure_output_id" + i).innerText = name;
         } 
       }
       
