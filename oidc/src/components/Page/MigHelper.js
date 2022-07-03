@@ -7,7 +7,7 @@ import Navbar from '../navBar';
 import SideMenu from '../sideMenu'
 import React, { useState } from "react";
 import $ from "jquery";
-
+import axios from 'axios'
 
 function MigHelper() {
 
@@ -48,8 +48,26 @@ function MigHelper() {
     let [nbpTable, nbpState] = useState(0);
     let [awsTable, awsState] = useState(0);
     let [azuTable, azuState] = useState(0);
-   
 
+    async function nbp_send_data(list){ // await 사용하기위해 async 사용
+        // let list_data = JSON.stringify({list: list});
+        // let meta_products = JSON.parse(list_data);
+        let list_data = {list:list};
+       // console.log(list_data)
+        await axios.post('http://127.0.0.1:8000/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
+                .then(response => { // post 요청을 했는데 return으로 그 결과 값이 전달되어서 GET을 수행하지 않았습니다.
+                    console.log(response.data['results']); 
+                     for (let i = 0; i < nbpTable; i++) {
+                        let result = response.data['results'][i];
+                        document.getElementById("nbp_output_id" + (5*i)).innerText = result[0];
+                        document.getElementById("nbp_output_id" + (5*i+1)).innerText =  result[1];
+                        document.getElementById("nbp_output_id" + (5*i+2)).innerText =  result[2];
+                        document.getElementById("nbp_output_id" + (5*i+3)).innerText =  result[3];
+                        document.getElementById("nbp_output_id" + (5*i+4)).innerText =  result[5]; // 출력값이 6개인데 5개만 사용하기로 합의 완료
+                    } 
+                })
+        }
+   
       const OPTIONS = [
         { id: 1, value: "미선택", name: "미선택"},
         { id: 2, value: "AWS", name: "AWS" },
@@ -210,7 +228,7 @@ function MigHelper() {
             Server.push(name); // JavaScript는 2차원 배열이 따로 없어서 1차원 배열에 대입하는식으로 수행했습니다.
         }  
 
-        for (let i = 0; i <= Table; i++) {
+        for (let i = 0; i < Table; i++) {
             let ReCPU = Number(Number(Server[4*i])*Number(Server[4*i+2])/100);
             let ReMEM = Number(Number(Server[4*i+1])*Number(Server[4*i+3]/100));
             Reserv.push(ReCPU);
@@ -218,6 +236,9 @@ function MigHelper() {
             //console.log(Reserv);
             document.getElementById("aws_output_id" + (5*i+1)).innerText = Math.ceil(Reserv[2*i]);
             document.getElementById("aws_output_id" + (5*i+2)).innerText = Math.ceil(Reserv[2*i+1]);
+            if (i == Table -1){
+            //aws_send_data(Reserv);
+            }
         } 
       }
 
@@ -229,14 +250,17 @@ function MigHelper() {
             Server.push(name); // JavaScript는 2차원 배열이 따로 없어서 1차원 배열에 대입하는식으로 수행했습니다.
         }  
 
-        for (let i = 0; i <= Table; i++) {
+        for (let i = 0; i < Table; i++) {
             let ReCPU = Number(Number(Server[4*i])*Number(Server[4*i+2])/100);
             let ReMEM = Number(Number(Server[4*i+1])*Number(Server[4*i+3]/100));
             Reserv.push(ReCPU);
             Reserv.push(ReMEM);
             //console.log(Reserv);
-            document.getElementById("nbp_output_id" + (5*i+1)).innerText = Math.ceil(Reserv[2*i]);
-            document.getElementById("nbp_output_id" + (5*i+2)).innerText = Math.ceil(Reserv[2*i+1]);
+            // document.getElementById("nbp_output_id" + (5*i+1)).innerText = Math.ceil(Reserv[2*i]);
+            // document.getElementById("nbp_output_id" + (5*i+2)).innerText = Math.ceil(Reserv[2*i+1]);
+            if (i == Table -1){
+                nbp_send_data(Reserv);
+                }
         } 
       }
 
@@ -248,14 +272,17 @@ function MigHelper() {
             Server.push(name); // JavaScript는 2차원 배열이 따로 없어서 1차원 배열에 대입하는식으로 수행했습니다.
         }  
 
-        for (let i = 0; i <= Table; i++) {
+        for (let i = 0; i < Table; i++) {  
             let ReCPU = Number(Number(Server[4*i])*Number(Server[4*i+2])/100);
             let ReMEM = Number(Number(Server[4*i+1])*Number(Server[4*i+3]/100));
-            Reserv.push(ReCPU);
-            Reserv.push(ReMEM);
+            Reserv.push(Math.ceil(ReCPU));
+            Reserv.push(Math.ceil(ReMEM));
             //console.log(Reserv);
             document.getElementById("azure_output_id" + (5*i+1)).innerText = Math.ceil(Reserv[2*i]);
             document.getElementById("azure_output_id" + (5*i+2)).innerText = Math.ceil(Reserv[2*i+1]);
+            if (i == Table-1){
+                //azure_send_data(Reserv);
+            }
         }
       }
       
