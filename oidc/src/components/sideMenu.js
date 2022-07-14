@@ -57,7 +57,7 @@ function SideMenu() {
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Dashboard</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/dashboard">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Dashboard
                 </a>
@@ -65,7 +65,7 @@ function SideMenu() {
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            Start Bootstrap
+            {localStorage.getItem("logInUserId")}
         </div>
     </nav>
     );
