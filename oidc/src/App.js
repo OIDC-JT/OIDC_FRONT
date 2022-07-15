@@ -8,6 +8,10 @@ import SignUp from './components/Page/SignUp';
 import LoginPage from './components/Page/LoginPage';
 import ServerAdd from './components/Page/ServerAdd';
 import BatchInstall from './components/Page/BatchInstall'
+import Security from './components/Page/Security'
+import LoginPageSecu from './components/Page/LoginPageSecu';
+import BatchInstallSecu from './components/Page/BatchInstallSecu';
+import ServerAddSecu from './components/Page/ServerAddSecu';
 
 const App = () => {
     return(
@@ -22,6 +26,10 @@ const App = () => {
                     <Route path='/LoginPage' element={<LoginPage/>}></Route>
                     <Route path='/ServerAdd' element={<ServerAdd/>}></Route>
                     <Route path='/BatchInstall' element={<BatchInstall/>}></Route>
+                    <Route path='/security' element={<Security/>}></Route>
+                    <Route path='/LoginPageSecu' element={<LoginPageSecu/>}></Route>
+                    <Route path='/SecuServerAdd' element={<ServerAddSecu/>}></Route>
+                    <Route path='/BatchInstallSecu' element={<BatchInstallSecu/>}></Route>
                 </Routes>
             </BrowserRouter>
         </div>
