@@ -61,6 +61,10 @@ function SideMenu() {
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Dashboard
                 </a>
+                <a class="nav-link" href="/security">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Security
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">
