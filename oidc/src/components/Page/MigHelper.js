@@ -59,10 +59,11 @@ function MigHelper() {
                     console.log(response.data['results']); 
                      for (let i = 0; i < nbpTable; i++) {
                         let result = response.data['results'][i];
-                        document.getElementById("nbp_output_id" + (5*i)).innerText = result[0];
+                        document.getElementById("nbp_output_id" + (5*i)).innerText  = result[0];
                         document.getElementById("nbp_output_id" + (5*i+1)).innerText =  result[1];
                         document.getElementById("nbp_output_id" + (5*i+2)).innerText =  result[2];
-                        document.getElementById("nbp_output_id" + (5*i+3)).innerText =  result[3];
+                        document.getElementById("nbp_output_id" + (5*i+3)).innerText =  result[3]; 
+                        result[5] = result[5].replace(/W/gi, "원");
                         document.getElementById("nbp_output_id" + (5*i+4)).innerText =  result[5]; // 출력값이 6개인데 5개만 사용하기로 합의 완료
                     } 
                 })
@@ -85,15 +86,15 @@ function MigHelper() {
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
             html += '<td><input type="number" min=0 id = aws_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
-            html += '<td><input type="number" min=0 id = aws_input_id'+ Number(4*i+1) +' style = "width:70px"></input></td>'
-            html += '<td><input type="number" step=0.1 max=100 min=0 id = aws_input_id'+ Number(4*i+2) +' style = "width:180px"></input></td>'
-            html += '<td><input type="number" step=0.1 max=100 min=0 id = aws_input_id'+ Number(4*i+3) +' style = "width:180px"></input></td>'
+            html += '<td><input type="number" min=0 id = aws_input_id'+ Number(4*i+1) +' style = "width:60px"></input></td>'
+            html += '<td><input type="number" step=0.1 max=100 min=0 id = aws_input_id'+ Number(4*i+2) +' style= "width:170px"></input></td>'
+            html += '<td><input type="number" step=0.1 max=100 min=0 id = aws_input_id'+ Number(4*i+3) +' style = "width:170px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = aws_output_id'+ Number(5*i) + '></p6></td>'
-            html += '<td><p6 id = aws_output_id'+ Number(5*i+1) + '></p6></td>'
-            html += '<td><p6 id = aws_output_id'+ Number(5*i+2) + '></p6></td>'
-            html += '<td><p6 id = aws_output_id'+ Number(5*i+3) + '></p6></td>'
-            html += '<td><p6 id = aws_output_id'+ Number(5*i+4) + '></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+1) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+2) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+3) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = aws_output_id'+ Number(5*i+4) + 'style = "font-size:13px"></p6></td>'
             html += '</tr>'
             html += '</tr>'
 
@@ -113,10 +114,10 @@ function MigHelper() {
             </div>      
             <table className = "table">
               <thead>  
-                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
-                <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){aws_printName(awsTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '150px'}}>DISK<br></br>(Storage)</th><th style={{width : '150px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px', fontSize:'14px'}}>CPU<br></br>(core 개수)</th><th style={{width : '90px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '210px', fontSize : '14px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
+                <th style={{width : '210px', fontSize:'14px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
+                <th style={{width : '90px', fontSize:'14px'}}><button className = "example_c" onClick = {function(){aws_printName(nbpTable)}} style={{width : '80px', marginBottom : '5px', fontSize:'14px'}}>분석하기</button></th><th style={{width : '140px', marginBottom : '7px', fontSize:'14px'}}>Server Name / Type</th><th style={{width : '120px', fontSize:'14px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '100px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '130px', fontSize:'14px'}}>DISK<br></br>(Storage)</th><th style={{width : '200px', fontSize:'14px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_1">
                 
@@ -132,15 +133,15 @@ function MigHelper() {
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
             html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
-            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i+1) +' style = "width:70px"</input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+2) +' style = "width:180px"></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+3) +' style = "width:180px"></input></td>'
+            html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i+1) +' style = "width:60px"</input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+2) +' style = "width:170px"></input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = nbp_input_id'+ Number(4*i+3) +' style = "width:170px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = nbp_output_id'+ Number(5*i) + '></p6></td>'
-            html += '<td><p6 id = nbp_output_id'+ Number(5*i+1) + '></p6></td>'
-            html += '<td><p6 id = nbp_output_id'+ Number(5*i+2) + '></p6></td>'
-            html += '<td><p6 id = nbp_output_id'+ Number(5*i+3) + '></p6></td>'
-            html += '<td><p6 id = nbp_output_id'+ Number(5*i+4) + '></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i) + ' style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+1) + ' style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+2) + ' style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+3) + ' style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = nbp_output_id'+ Number(5*i+4) + ' style = "font-size:13px"></p6></td>'
             html += '</tr>'
 
             //console.log(html);
@@ -159,10 +160,10 @@ function MigHelper() {
             </div>      
             <table className = "table">
               <thead>  
-                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
-                <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){nbp_printName(nbpTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '150px'}}>DISK<br></br>(Storage)</th><th style={{width : '150px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px', fontSize:'14px'}}>CPU<br></br>(core 개수)</th><th style={{width : '90px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '210px', fontSize : '14px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
+                <th style={{width : '210px', fontSize:'14px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
+                <th style={{width : '90px', fontSize:'14px'}}><button className = "example_c" onClick = {function(){nbp_printName(nbpTable)}} style={{width : '80px', marginBottom : '5px', fontSize:'14px'}}>분석하기</button></th><th style={{width : '140px', marginBottom : '7px', fontSize:'14px'}}>Server Name / Type</th><th style={{width : '120px', fontSize:'14px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '100px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '130px', fontSize:'14px'}}>DISK<br></br>(Storage)</th><th style={{width : '200px', fontSize:'14px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_2">
                 
@@ -178,15 +179,15 @@ function MigHelper() {
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
             html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
-            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i+1) +' style = "width:70px"></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+2) +' style = "width:180px"></input></td>'
-            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+3) +' style = "width:180px"></input></td>'
+            html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i+1) +' style = "width:60px"></input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+2) +' style = "width:170px"></input></td>'
+            html += '<td><input type="number" max=100 step=0.1 min=0 id = azure_input_id'+ Number(4*i+3) +' style = "width:170px"></input></td>'
             html += '<td><p6></p6></td>'
-            html += '<td><p6 id = azure_output_id'+ Number(5*i) + ' ></p6></td>'
-            html += '<td><p6 id = azure_output_id'+ Number(5*i+1) + '></p6></td>'
-            html += '<td><p6 id = azure_output_id'+ Number(5*i+2) + '></p6></td>'
-            html += '<td><p6 id = azure_output_id'+ Number(5*i+3) + '></p6></td>'
-            html += '<td><p6 id = azure_output_id'+ Number(5*i+4) + '></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i) + 'style = "font-size:13px" ></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+1) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+2) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+3) + 'style = "font-size:13px"></p6></td>'
+            html += '<td><p6 id = azure_output_id'+ Number(5*i+4) + 'style = "font-size:13px"></p6></td>'
             html += '</tr>'
 
             //console.log(html);
@@ -205,10 +206,10 @@ function MigHelper() {
             </div>      
             <table className = "table">
               <thead>  
-                <th style={{width : '100px'}}>CPU<br></br>(core 개수)</th><th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '220px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
-                <th style={{width : '220px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
-                <th style={{width : '90px'}}><button className = "example_c" onClick = {function(){azure_printName(azuTable)}} style={{width : '90px', marginBottom : '7px'}}>분석하기</button></th><th style={{width : '120px', marginBottom : '7px'}}>Server Name / Type</th><th style={{width : '110px'}}>CPU<br></br>(Core 개수)</th>
-                <th style={{width : '100px'}}>Memory<br></br>(메모리)</th><th style={{width : '150px'}}>DISK<br></br>(Storage)</th><th style={{width : '150px'}}>Price<br></br>(730h)</th>
+                <th style={{width : '100px', fontSize:'14px'}}>CPU<br></br>(core 개수)</th><th style={{width : '90px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '210px', fontSize : '14px'}}>CPU 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>
+                <th style={{width : '210px', fontSize:'14px'}}>Memory 최대 사용률(%)<br></br>(일일 최대 사용률의 평균)</th>  
+                <th style={{width : '90px', fontSize:'14px'}}><button className = "example_c" onClick = {function(){azure_printName(nbpTable)}} style={{width : '80px', marginBottom : '5px', fontSize:'14px'}}>분석하기</button></th><th style={{width : '140px', marginBottom : '7px', fontSize:'14px'}}>Server Name / Type</th><th style={{width : '120px', fontSize:'14px'}}>CPU<br></br>(Core 개수)</th>
+                <th style={{width : '100px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '130px', fontSize:'14px'}}>DISK<br></br>(Storage)</th><th style={{width : '200px', fontSize:'14px'}}>Price<br></br>(730h)</th>
                </thead>  
             <tbody className='Tbody' id ="dynamicTbody_3">
             </tbody>
