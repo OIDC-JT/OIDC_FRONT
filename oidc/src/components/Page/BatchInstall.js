@@ -32,8 +32,15 @@ import $ from "jquery";
 
                 <div classname="d-grid" style={{textAlign : 'center'}}>
                     <span></span>
+                    <Link to = "/ServerAdd">
+                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width : '200px'}}>다른 서버 추가하기</Button> 
+                    </Link>
+                </div>
+
+                <div classname="d-grid" style={{textAlign : 'center'}}>
+                    <span></span>
                     <Link to = "/LoginPage">
-                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width:'100px'}}>완 료</Button> 
+                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width:'200px'}}>완 료</Button> 
                     </Link>
                 </div>
                 </>
@@ -78,5 +85,4 @@ function BatchInstall() {
 }
 
 export default BatchInstall;
-
 
