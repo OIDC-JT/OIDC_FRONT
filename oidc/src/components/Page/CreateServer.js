@@ -63,6 +63,7 @@ function CreateServer(){
                         document.getElementById("nbp_output_id" + (5*i+1)).innerText =  result[1];
                         document.getElementById("nbp_output_id" + (5*i+2)).innerText =  result[2];
                         document.getElementById("nbp_output_id" + (5*i+3)).innerText =  result[3];
+                        result[5] = result[5].replace(/W/gi, "원");
                         document.getElementById("nbp_output_id" + (5*i+4)).innerText =  result[5]; // 출력값이 6개인데 5개만 사용하기로 합의 완료
                     } 
                 })
@@ -253,7 +254,7 @@ function CreateServer(){
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">CreateServer Helper</h1>
+                            <h1 class="mt-4">Server Create Helper</h1>
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item active">CreateServer Helper</li>
                             </ol>

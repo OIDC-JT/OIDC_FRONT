@@ -11,19 +11,6 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
-async function addComplete() {
-    await axios.get('http://127.0.0.1:8000/accounts/login/S3')
-    .then(response => {
-        let S3 = response.data; // 백앤드에서 S3 주소 알아오기
-        localStorage.setItem('S3_URL', S3);
-    })
-    .catch(err => {        
-        console.log(err);
-        alert('S3 주소를 가져오지 못했습니다.');
-        localStorage.setItem('S3_TEMP', 'https://www.daum.net'); // api가 없을테니 실패했을 때에 localstorage에 저장해보았다.
-      })
-    window.location.href = "/BatchInstall";
-}
 
 async function makeServer(){ // await 사용하기위해 async 사용
 
@@ -37,11 +24,12 @@ async function makeServer(){ // await 사용하기위해 async 사용
             .then(response => {
               console.log(response)
               alert('서버 추가가 완료되었습니다.');
+              window.location.href = "/BatchInstall";
             })
             .catch(err => {        
               console.log(err);
               alert('서버 추가에 실패하였습니다.');
-              //window.location.href = "/BatchInstall";
+              window.location.href = "/BatchInstall";
             })
     }
 
@@ -78,10 +66,7 @@ async function makeServer(){ // await 사용하기위해 async 사용
                     <Button variant="dark" type = "submit" onClick = {function(){makeServer()}} style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px'}}>서버 추가하기</Button> 
                 </div>
 
-                <div classname="d-grid" style={{textAlign : 'center'}}>
-                    <span></span>
-                     <Button variant="dark" onClick = {function(){addComplete()}} style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px'}}>서버 추가완료</Button> 
-                </div>
+               
 
                 <div classname="d-grid" style={{textAlign : 'center'}}>
                     <span></span>
