@@ -303,7 +303,7 @@ function url_group21(){
               </select>
             </div>
 
-            {/* <div className='grafana'>
+            <div className='grafana'>
             <iframe id='frame1' className='iframe_small'
                src = {url_group1()}
                width="300px"
@@ -425,7 +425,7 @@ function url_group21(){
                height="500px"
             ></iframe>
              </div> 
-            </div>  */}
+            </div> 
           </>       
     }
     

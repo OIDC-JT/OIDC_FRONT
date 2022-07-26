@@ -13,7 +13,24 @@ import Dashboard from './Dashboard';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
-
+let json = [
+  {
+    "hostname": "abc1",
+    "status" : "Good"
+  },
+  {
+    "hostname": "abc2",
+    "status" : "Good"
+  },
+  {
+    "hostname": "abc3",
+    "status" : "Not Good"
+  },
+  {
+    "hostname": "abc3",
+    "status" : "Good"
+  },
+] //더미데이터
 
                   
   async function signin(){ // await 사용하기위해 async 사용   로그인
@@ -60,6 +77,28 @@ import $ from "jquery";
             console.log('로그아웃에 실패하였습니다.');
             window.location.reload();
           })
+    }
+
+    function getSecu(){ // getSecu URL에서 사용자가 등록한 호스트에 대한 검사 결과를 django DB에서 가져온다.
+      axios.post('http://127.0.0.1:8000/getSecu', localStorage.getItem("logInUserId"))
+      .then(response => {
+        console.log("성공")
+        for(let i = 0; i < response.length; i++){
+          <div>
+            <p6>i.hostname</p6>
+            <p6>i.status</p6>
+          </div>
+        }
+      })
+      .catch(err => {
+        let aaa = ""
+        console.log(json.length)
+        for(let i = 0; i <json.length; i++){
+          aaa = aaa+ "<div><p6>" + json[i].hostname + "</p6><br></br><p6>" + json[i].status + "</p6></div>"
+          aaa = aaa+ "<hr></hr>"
+        }
+        $("#getSecu").append(aaa)
+      })
     }
     
   let content = null;
@@ -119,9 +158,9 @@ import $ from "jquery";
                 </Link>
                 <Button variant="dark" onClick = {function(){log_out()}} style = {{borderRadius: '30px', fontWeight : 'bold', textAlign : 'right', float : 'right'}}>로그아웃</Button>
             </div>
-            <form>
-
-            </form>
+            <div id='getSecu'>
+              {getSecu()}
+            </div>
           </>       
     }
     

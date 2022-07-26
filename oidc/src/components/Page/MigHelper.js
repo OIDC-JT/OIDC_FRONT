@@ -157,10 +157,9 @@ function MigHelper() {
         </article>
     }
     else if (mode === 'Azure') {
-        $("#dynamicTbody_1").empty()
-        $("#dynamicTbody_2").empty()
-        //console.log(azuTable)
-        for (let i = 0; i < azuTable; i++) {    
+        $("#dynamicTbody_1").empty() // 현재 화면에서 AWS 테이블과 겹치면 안되기에 jQuery를 활용해서 Tbody를 비워준다.
+        $("#dynamicTbody_2").empty() // 현재 화면에서 NBP 테이블과 겹치면 안되기에 jQuery를 활용해서 Tbody를 비워준다.
+        for (let i = 0; i < azuTable; i++) { // azuTable은 State 값이며, 추가하기 버튼이 눌러지면 nbpTable값이 변경되면서 For문이 다시 시행된다.      
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
             html += '<td><input type="number" min=0 id = azure_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
@@ -175,15 +174,12 @@ function MigHelper() {
             html += '<td><p6 id = azure_output_id'+ Number(5*i+4) + 'style = "font-size:13px"></p6></td>'
             html += '</tr>'
 
-            //console.log(html);
         }
-        $("#dynamicTbody_3").append(html);
+        $("#dynamicTbody_3").append(html);  // 생성한 html태그를 jQuery를 활용해서 테이블 행을 추가한다. 
 
-        //console.log(tablecontent);
-    
         content = 
         
-        <article>
+        <article>  
             <div>
                  <button className = "example_c" onClick={function() { 
                         azuState(azuTable + 1); 
@@ -219,11 +215,9 @@ function MigHelper() {
             let ReMEM = Number(Number(Server[4*i+1])*Number(Server[4*i+3]/100));
             Reserv.push(ReCPU);
             Reserv.push(ReMEM);
-            //console.log(Reserv);
             document.getElementById("aws_output_id" + (5*i+1)).innerText = Math.ceil(Reserv[2*i]);
             document.getElementById("aws_output_id" + (5*i+2)).innerText = Math.ceil(Reserv[2*i+1]);
             if (i == Table -1){
-            //aws_send_data(Reserv);
             }
         } 
       }
