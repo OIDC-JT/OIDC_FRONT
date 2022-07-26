@@ -45,44 +45,41 @@ function MigHelper() {
     };  
 
     const [mode, setMode] = useState('');
-    let [nbpTable, nbpState] = useState(0);
-    let [awsTable, awsState] = useState(0);
-    let [azuTable, azuState] = useState(0);
+    let [nbpTable, nbpState] = useState(0); // nbpTable 행의 개수를 의미하며 추가하기 버튼을 누를 때마다 State값이 증가하도록 설정 
+    let [awsTable, awsState] = useState(0); // awsTable 행의 개수를 의미하며 추가하기 버튼을 누를 때마다 State값이 증가하도록 설정 
+    let [azuTable, azuState] = useState(0); // azuTable 행의 개수를 의미하며 추가하기 버튼을 누를 때마다 State값이 증가하도록 설정 
 
     async function nbp_send_data(list){ // await 사용하기위해 async 사용
-        // let list_data = JSON.stringify({list: list});
-        // let meta_products = JSON.parse(list_data);
+    
         let list_data = {list:list};
-       // console.log(list_data)
-        await axios.post('http://127.0.0.1:8000/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
-                .then(response => { // post 요청을 했는데 return으로 그 결과 값이 전달되어서 GET을 수행하지 않았습니다.
-                    console.log(response.data['results']); 
+        await axios.post('http://127.0.0.1:8000/', list_data) // post 수행 시, 계산 결과 값을 백앤드에서 return 받게 된다.
+                .then(response => { 
+                    //console.log(response.data['results']); 
                      for (let i = 0; i < nbpTable; i++) {
                         let result = response.data['results'][i];
-                        document.getElementById("nbp_output_id" + (5*i)).innerText  = result[0];
-                        document.getElementById("nbp_output_id" + (5*i+1)).innerText =  result[1];
-                        document.getElementById("nbp_output_id" + (5*i+2)).innerText =  result[2];
-                        document.getElementById("nbp_output_id" + (5*i+3)).innerText =  result[3]; 
-                        result[5] = result[5].replace(/W/gi, "원");
-                        document.getElementById("nbp_output_id" + (5*i+4)).innerText =  result[5]; // 출력값이 6개인데 5개만 사용하기로 합의 완료
+                        document.getElementById("nbp_output_id" + (5*i)).innerText  = result[0]; // Server Name / Type
+                        document.getElementById("nbp_output_id" + (5*i+1)).innerText =  result[1]; // CPU (Core 개수)
+                        document.getElementById("nbp_output_id" + (5*i+2)).innerText =  result[2]; // Memory 
+                        document.getElementById("nbp_output_id" + (5*i+3)).innerText =  result[3]; // Disk (Storage)
+                        result[5] = result[5].replace(/W/gi, "원"); // Price
+                        document.getElementById("nbp_output_id" + (5*i+4)).innerText =  result[5]; // api 출력값이 6개인데 5개만 사용하기로 합의 완료
                     } 
                 })
         }
    
-      const OPTIONS = [
+      const OPTIONS = [ // SelectBox에서 선택할 수 있는  Cloud Service Provider 항목들
         { id: 1, value: "미선택", name: "미선택"},
         { id: 2, value: "AWS", name: "AWS" },
         { id: 3, value: "NBP", name: "NBP" },
         { id: 4, value: "Azure", name: "Azure"},
      ]
      
-     
     let content = null;
-    if (mode === 'AWS') {
-        $("#dynamicTbody_2").empty()
-        $("#dynamicTbody_3").empty()
-        //console.log(awsTable)
-        for (let i = 0; i < awsTable; i++) {    
+    if (mode === 'AWS') { // SelectBox에서 AWS를 선택 시
+        $("#dynamicTbody_2").empty() // 현재 화면에서 NBP 테이블과 겹치면 안되기에 jQuery를 활용해서 Tbody를 비워준다.
+        $("#dynamicTbody_3").empty() // 현재 화면에서 Azure 테이블과 겹치면 안되기에 jQuery를 활용해서 Tbody를 비워준다.
+
+        for (let i = 0; i < awsTable; i++) {  // awsTable은 State 값이며, 추가하기 버튼이 눌러지면 awsTable값이 변경되면서 For문이 다시 시행된다.  
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
             html += '<td><input type="number" min=0 id = aws_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
@@ -97,20 +94,16 @@ function MigHelper() {
             html += '<td><p6 id = aws_output_id'+ Number(5*i+4) + 'style = "font-size:13px"></p6></td>'
             html += '</tr>'
             html += '</tr>'
-
-            //console.log(html);
         }
-        $("#dynamicTbody_1").append(html);
-
-        //console.log(tablecontent);
+        $("#dynamicTbody_1").append(html); // 생성한 html 태그는 테이블의 행을 의미하며, jQuery를 활용해서 table에 추가해주었다.
     
         content = 
         
         <article>
-            <div>
+            <div> 
                  <button className = "example_c" onClick={function() { 
                         awsState(awsTable + 1); 
-                 }}>추가하기</button>
+                 }}>추가하기</button> {/*표의 행을 증가시켜주는 함수이며, awsState 값을 증가시킨다. 증가되면 for문이 시행되면서 행을 추가한다.*/}
             </div>      
             <table className = "table">
               <thead>  
@@ -119,17 +112,15 @@ function MigHelper() {
                 <th style={{width : '90px', fontSize:'14px'}}><button className = "example_c" onClick = {function(){aws_printName(nbpTable)}} style={{width : '80px', marginBottom : '5px', fontSize:'14px'}}>분석하기</button></th><th style={{width : '140px', marginBottom : '7px', fontSize:'14px'}}>Server Name / Type</th><th style={{width : '120px', fontSize:'14px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '130px', fontSize:'14px'}}>DISK<br></br>(Storage)</th><th style={{width : '200px', fontSize:'14px'}}>Price<br></br>(730h)</th>
                </thead>  
-            <tbody className='Tbody' id ="dynamicTbody_1">
-                
-            </tbody>
+            <tbody className='Tbody' id ="dynamicTbody_1"></tbody>
             </table>
         </article>
     }
     else if (mode === 'NBP') {
-        $("#dynamicTbody_1").empty()
-        $("#dynamicTbody_3").empty()
+        $("#dynamicTbody_1").empty() // 현재 화면에서 AWS 테이블과 겹치면 안되기에 jQuery를 활용해서 Tbody를 비워준다.
+        $("#dynamicTbody_3").empty() // 현재 화면에서 Azure 테이블과 겹치면 안되기에 jQuery를 활용해서 Tbody를 비워준다.
         //console.log(nbpTable)
-        for (let i = 0; i < nbpTable; i++) {    
+        for (let i = 0; i < nbpTable; i++) { // nbpTable은 State 값이며, 추가하기 버튼이 눌러지면 nbpTable값이 변경되면서 For문이 다시 시행된다.    
             var html = '';
             html += '<tr id = tr_id '+ i +'>'
             html += '<td><input type="number" min=0 id = nbp_input_id'+ Number(4*i) + ' style = "width:70px"></input></td>'
@@ -143,20 +134,16 @@ function MigHelper() {
             html += '<td><p6 id = nbp_output_id'+ Number(5*i+3) + ' style = "font-size:13px"></p6></td>'
             html += '<td><p6 id = nbp_output_id'+ Number(5*i+4) + ' style = "font-size:13px"></p6></td>'
             html += '</tr>'
-
-            //console.log(html);
         }
-        $("#dynamicTbody_2").append(html);
+        $("#dynamicTbody_2").append(html); // 생성한 html태그를 jQuery를 활용해서 테이블 행을 추가한다.
 
-        //console.log(tablecontent);
-    
         content = 
         
         <article>
             <div>
                  <button className = "example_c" onClick={function() { 
                         nbpState(nbpTable + 1); 
-                 }}>추가하기</button>
+                 }}>추가하기</button> {/* nbpTable의 State 값을 1씩 증가시켜준다. */}
             </div>      
             <table className = "table">
               <thead>  
@@ -165,9 +152,7 @@ function MigHelper() {
                 <th style={{width : '90px', fontSize:'14px'}}><button className = "example_c" onClick = {function(){nbp_printName(nbpTable)}} style={{width : '80px', marginBottom : '5px', fontSize:'14px'}}>분석하기</button></th><th style={{width : '140px', marginBottom : '7px', fontSize:'14px'}}>Server Name / Type</th><th style={{width : '120px', fontSize:'14px'}}>CPU<br></br>(Core 개수)</th>
                 <th style={{width : '100px', fontSize:'14px'}}>Memory<br></br>(메모리)</th><th style={{width : '130px', fontSize:'14px'}}>DISK<br></br>(Storage)</th><th style={{width : '200px', fontSize:'14px'}}>Price<br></br>(730h)</th>
                </thead>  
-            <tbody className='Tbody' id ="dynamicTbody_2">
-                
-            </tbody>
+            <tbody className='Tbody' id ="dynamicTbody_2"></tbody>
             </table>
         </article>
     }

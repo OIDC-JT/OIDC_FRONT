@@ -20,7 +20,7 @@ import $ from "jquery";
               <>
                 <div classname="mb-3" style = {{textAlign:'center'}}>
                     <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>S3 URL : </label> 
-                    <a id = 'S3_URL' href = {localStorage.getItem('S3_TEMP')} target='_blank' font Size = '50px'>{localStorage.getItem('S3_TEMP')}</a> 
+                    <a id = 'S3_URL' href = {`https://kr.object.ncloudstorage.com/oidc/${localStorage.getItem('logInUserId')}.bat`} target='_blank' font Size = '50px'>배치파일 다운로드</a> 
                 </div>
 
                 <div classname="mb-3" style = {{textAlign:'center'}}>
