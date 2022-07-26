@@ -6,6 +6,8 @@
 
 ### 2. 웹 페이지 디자인 오픈소스
     https://startbootstrap.com/template/sb-admin
+    
+![캡쳐1](https://user-images.githubusercontent.com/86856855/181065167-33b9da6e-d084-4ad0-b652-7891844afa2e.jpg)    
 
 ### 3. 기능에 따른 컴포넌트 경로
     1. oidc > src > components (웹 페이지 디자인 오픈소스)
