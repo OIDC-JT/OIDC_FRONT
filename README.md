@@ -10,3 +10,9 @@
 ### 3. 각 컴포넌트가 제공하는 기능에 대한 설명
     1. oidc > src > components (웹 페이지 디자인 오픈소스)
     2. oidc > src > components > pages (각 웹 페이지 세부 구성 요소)
+    
+### 3-1. 웹 페이지 디자인 오픈소스(oidc > src > components)
+    1. style.css : 오픈소스에서 제공하는 웹페이지 css
+    2. footer.js
+    3. navBar.js
+    4. sideMenu.js
