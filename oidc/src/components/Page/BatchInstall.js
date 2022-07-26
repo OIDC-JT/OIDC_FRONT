@@ -20,7 +20,11 @@ import $ from "jquery";
               <>
                 <div classname="mb-3" style = {{textAlign:'center'}}>
                     <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>S3 URL : </label> 
+<<<<<<< HEAD
                     <a id = 'S3_URL' href = {`https://kr.object.ncloudstorage.com/oidc/${localStorage.getItem('logInUserId')}.bat`} target='_blank' font Size = '50px'> 배치파일 다운로드</a> 
+=======
+                    <a id = 'S3_URL' href = {`https://kr.object.ncloudstorage.com/oidc/${localStorage.getItem('logInUserId')}.bat`} target='_blank' font Size = '50px'>배치파일 다운로드</a> 
+>>>>>>> ecc601d9e1b9f79c980f46b2a21de6397718906f
                 </div>
 
                 <div classname="mb-3" style = {{textAlign:'center'}}>

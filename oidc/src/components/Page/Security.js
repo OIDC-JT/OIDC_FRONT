@@ -14,8 +14,6 @@ import {BrowserRouter as Router, Link} from 'react-router-dom';
 import LoginPageSecu from './LoginPageSecu';
 
 
-Modal.setAppElement("#root");
-
 function Security(){
 
 if(localStorage.getItem("auth") != null){
@@ -26,18 +24,28 @@ let content = <>
 
 <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
             <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
-              <Card.Title>Migration Helper Dashboard</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">보안 대시보드 화면입니다.</Card.Subtitle>
-              <Card.Text>
-                저희 서비스를 이용해주셔서 감사합니다. 서비스 진행을 위해 로그인을 해주십시오.
-                아이디가 존재하지 않을 경우 회원가입을 수행해주세요.
-              </Card.Text>
-              <Link to = "/SignUp">
-               <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold'}}>회원가입</Button> 
-              </Link>
-              <Link to = "/LoginPageSecu">
-               <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold'}}>로그인</Button> 
-              </Link>
+              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '45px', marginBottom : '15px', width : '800px'}}>Security Governance</Card.Title>
+              <hr></hr> 
+              <>
+                <div classname="mb-3" style = {{textAlign:'center', marginBottom:'20px'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '25px', marginBottom : '5px' }}>저희 서비스를 이용해주셔서 감사합니다.</label>
+                    <span></span>
+                    <label style = {{fontWeight : 'bold', fontSize : '25px', marginBottom : '5px' }}>아이디가 존재하지 않을 경우 회원가입을 진행해주세요.</label>
+                </div>
+
+                <div classname="d-grid" style={{textAlign : 'center'}}>
+                    <Link to = "/SignUp">
+                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width : '200px', fontSize : '25px'}}>회원가입</Button> 
+                    </Link>
+                </div>
+
+                <div classname="d-grid" style={{textAlign : 'center'}}>
+                    <span></span>
+                    <Link to = "/LoginPageSecu">
+                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width:'200px', fontSize : '25px'}}>로그인</Button> 
+                    </Link>
+                </div>
+                </>
             </Card.Body>  
           </Card>
 </>;

@@ -13,17 +13,26 @@ import Dashboard from './Dashboard';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
+async function SelectBoXGet() {
 
-function SelectBoXGet() {
-  const box = ['white', 'red', 'black', 'yellow']; 
-  useEffect(() => {
-    for (let i = 0; i < box.length; i++) {
-      $("#host_box").append("<option value='"+ i +"'>"+ box[i] + "</option>"); 
+  let username = {ID : localStorage.getItem('logInUserId')};
+  await axios.post('http://127.0.0.1:8000/SelectBoxGet', username) 
+            .then(response => {
+              console.log(response.data);
+              window.location.replace();
+            })
+            .catch(err => {        
+              console.log(err);
+              alert('서버 추가에 실패하였습니다.');
+              window.location.replace();
+            })
+            const box = ['white', 'red', 'black', 'yellow'];  // 받은 데이터를 여기에다가 대입 해줘야한다.
+            useEffect(() => {
+              for (let i = 0; i < box.length; i++) {
+                $("#host_box").append("<option value='"+ i +"'>"+ box[i] + "</option>"); 
+              }
+            });
     }
-  });
-}  
-
-
 
 function url_group1(){ //url_group1 ~ 21까지 모니터링에 필요한 UI 임베디드
   let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
@@ -94,7 +103,11 @@ function url_group9(){
           url = url + localStorage.getItem("logInUserId")
           url = url + "&var-Host="
           url = url + "dongguk"
+<<<<<<< HEAD
           url = url + "&var-Filesystem=All&var-Network=All&theme=dark&panelId=22"
+=======
+          url = url + "&var-Filesystem=All&var-Network=All&panelId=22"
+>>>>>>> ecc601d9e1b9f79c980f46b2a21de6397718906f
           return url;
           }
 function url_group10(){
@@ -294,7 +307,7 @@ function url_group21(){
               </select>
             </div>
 
-            <div className='grafana'>
+            {/* <div className='grafana'>
             <iframe id='frame1' className='iframe_small'
                src = {url_group1()}
                width="300px"
@@ -416,7 +429,7 @@ function url_group21(){
                height="500px"
             ></iframe>
              </div> 
-            </div> 
+            </div>  */}
           </>       
     }
     
@@ -426,7 +439,6 @@ logged_in();
 
 function LoginPage() {
   SelectBoXGet();
-
     return (
         <div className="MigHelper">
         <body class="sb-nav-fixed">
@@ -438,7 +450,7 @@ function LoginPage() {
                 <div id="layoutSidenav_content">
                     <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">모니터링 대시보드</h1>
+                        <h1 class="mt-4">Login</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">로그인</li>
                         </ol>
