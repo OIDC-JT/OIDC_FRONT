@@ -85,4 +85,3 @@ function BatchInstall() {
 }
 
 export default BatchInstall;
-

@@ -12,6 +12,7 @@ import Security from './components/Page/Security' // 보안 취약점을 분석�
 import LoginPageSecu from './components/Page/LoginPageSecu'; // 보안 거버넌스 페이지의 로그인 페이지로 이동
 import BatchInstallSecu from './components/Page/BatchInstallSecu'; // 보안 취약점을 분석해주는 파일 URI를 생성해준다. 
 import ServerAddSecu from './components/Page/ServerAddSecu'; // 보안 취약점을 분석하고 싶은 서버를 등록하는 페이지
+
 // Route 함수를 활용하기 위해 제작한 컴포넌트 import 수행
 
 

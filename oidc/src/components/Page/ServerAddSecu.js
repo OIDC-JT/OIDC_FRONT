@@ -24,12 +24,12 @@ async function makeServer(){ // await 사용하기위해 async 사용
             .then(response => {
               console.log(response)
               alert('서버 추가가 완료되었습니다.');
-              window.location.href = "/BatchInstallSecu";
+              window.location.href = "/BatchInstallSecu"; //성공했을 때, 배치파일을 다운로드 받을 수 있도록 연결해준다.
             })
             .catch(err => {        
               console.log(err);
               alert('서버 추가에 실패하였습니다.');
-              window.location.href = "/BatchInstallSecu";
+              window.location.href = "/BatchInstallSecu";//실패했을 때, 오류메세지와 함께 새로고침하도록 수정해야함.
             })
     }
 

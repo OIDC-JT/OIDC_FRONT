@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 import $ from "jquery";
 
 async function SelectBoXGet() {
-
   let username = {ID : localStorage.getItem('logInUserId')};
   await axios.post('http://127.0.0.1:8000/SelectBoxGet', username) 
             .then(response => {
@@ -23,15 +22,11 @@ async function SelectBoXGet() {
             })
             .catch(err => {        
               console.log(err);
-              alert('서버 추가에 실패하였습니다.');
-              window.location.replace();
-            })
-            const box = ['white', 'red', 'black', 'yellow'];  // 받은 데이터를 여기에다가 대입 해줘야한다.
-            useEffect(() => {
-              for (let i = 0; i < box.length; i++) {
-                $("#host_box").append("<option value='"+ i +"'>"+ box[i] + "</option>"); 
-              }
-            });
+              const box = ['All', 'white', 'red', 'black', 'yellow', 'blue'];  // 받은 데이터를 여기에다가 대입 해줘야한다.
+                   for (let i = 0; i < box.length; i++) {
+                  $("#host_box").append("<option value='"+ i +"'>"+ box[i] + "</option>"); 
+                }
+            })     
     }
 
 function url_group1(){ //url_group1 ~ 21까지 모니터링에 필요한 UI 임베디드
@@ -298,7 +293,7 @@ function url_group21(){
 
             <div>
               <label style ={{fontWeight:'bold', fontSize:'25px', marginRight : '20px', marginTop:'10px', marginBottom : '10px'}}>호스트 목록</label>
-              <select id='host_box' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '40px', borderStyle : 'solid', borderColor:'black'}}>
+              <select name = 'host_box' id = 'host_box' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '40px', borderStyle : 'solid', borderColor:'black'}}>
 
               </select>
             </div>
@@ -431,10 +426,11 @@ function url_group21(){
     
   }
 logged_in();
+SelectBoXGet();
 
 
 function LoginPage() {
-  SelectBoXGet();
+ 
     return (
         <div className="MigHelper">
         <body class="sb-nav-fixed">

@@ -16,7 +16,8 @@ import $ from "jquery";
 let json = [
   {
     "hostname": "abc1",
-    "status" : "Good"
+    "status" : "Good",
+    "virus" : "",
   },
   {
     "hostname": "abc2",
@@ -27,7 +28,7 @@ let json = [
     "status" : "Not Good"
   },
   {
-    "hostname": "abc3",
+    "hostname": "abc4",
     "status" : "Good"
   },
 ] //더미데이터
@@ -82,7 +83,6 @@ let json = [
     function getSecu(){ // getSecu URL에서 사용자가 등록한 호스트에 대한 검사 결과를 django DB에서 가져온다.
       axios.post('http://127.0.0.1:8000/getSecu', localStorage.getItem("logInUserId"))
       .then(response => {
-        console.log("성공")
         for(let i = 0; i < response.length; i++){
           <div>
             <p6>i.hostname</p6>
@@ -94,10 +94,20 @@ let json = [
         let aaa = ""
         console.log(json.length)
         for(let i = 0; i <json.length; i++){
-          aaa = aaa+ "<div><p6>" + json[i].hostname + "</p6><br></br><p6>" + json[i].status + "</p6></div>"
-          aaa = aaa+ "<hr></hr>"
+          if (json[i].status == "Good") {
+            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
+            aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
+            aaa = aaa + "</div>"
+          }
+          else {
+            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
+            aaa = aaa + " <br><div style = 'width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-danger' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Warning</button> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록이 표기됩니다.</div><br></div>"
+            aaa = aaa + "</div>"
+          }
         }
-        $("#getSecu").append(aaa)
+        $("#getSecu").append(aaa) 
       })
     }
     

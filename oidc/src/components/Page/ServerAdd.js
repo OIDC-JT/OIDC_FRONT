@@ -23,13 +23,13 @@ async function makeServer(){ // await 사용하기위해 async 사용
     await axios.post('http://127.0.0.1:8000/ServerAdd', list_data) // ServerAdd라는 url을 임시적으로 지정해봤습니다.
             .then(response => {
               console.log(response)
-              alert('서버 추가가 완료되었습니다.');
+              alert('서버 추가가 완료되었습니다.'); //성공했을 때, 배치파일을 다운로드 받을 수 있도록 연결해준다.
               window.location.href = "/BatchInstall";
             })
             .catch(err => {        
               console.log(err);
               alert('서버 추가에 실패하였습니다.');
-              window.location.href = "/BatchInstall";
+              window.location.href = "/BatchInstall"; //실패했을 때, 오류메세지와 함께 새로고침하도록 수정해야함.
             })
     }
 
@@ -46,7 +46,7 @@ async function makeServer(){ // await 사용하기위해 async 사용
 
                 <div>
                     <select name='OS_ver' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '30px', borderStyle : 'solid', borderColor:'black'}}>
-                       <option value="Centos7">Centos7</option>
+                       <option value="Centos7">Centos7</option> {/*OS버전 선택 박스*/}
                        <option value="Centos6">Centos6</option>
                        <option value="Ubuntu20.04">Ubuntu20.04 </option>
                        <option value="Ubuntu18.04">Ubuntu18.04</option>
