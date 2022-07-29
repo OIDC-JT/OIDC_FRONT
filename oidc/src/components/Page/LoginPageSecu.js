@@ -13,7 +13,25 @@ import Dashboard from './Dashboard';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
-
+let json = [
+  {
+    "hostname": "abc1",
+    "status" : "Good",
+    "virus" : "",
+  },
+  {
+    "hostname": "abc2",
+    "status" : "Good"
+  },
+  {
+    "hostname": "abc3",
+    "status" : "Not Good"
+  },
+  {
+    "hostname": "abc4",
+    "status" : "Good"
+  },
+] //더미데이터
 
                   
   async function signin(){ // await 사용하기위해 async 사용   로그인
@@ -60,6 +78,37 @@ import $ from "jquery";
             console.log('로그아웃에 실패하였습니다.');
             window.location.reload();
           })
+    }
+
+    function getSecu(){ // getSecu URL에서 사용자가 등록한 호스트에 대한 검사 결과를 django DB에서 가져온다.
+      axios.post('http://127.0.0.1:8000/getSecu', localStorage.getItem("logInUserId"))
+      .then(response => {
+        for(let i = 0; i < response.length; i++){
+          <div>
+            <p6>i.hostname</p6>
+            <p6>i.status</p6>
+          </div>
+        }
+      })
+      .catch(err => {
+        let aaa = ""
+        console.log(json.length)
+        for(let i = 0; i <json.length; i++){
+          if (json[i].status == "Good") {
+            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
+            aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
+            aaa = aaa + "</div>"
+          }
+          else {
+            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
+            aaa = aaa + " <br><div style = 'width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-danger' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Warning</button> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록이 표기됩니다.</div><br></div>"
+            aaa = aaa + "</div>"
+          }
+        }
+        $("#getSecu").append(aaa) 
+      })
     }
     
   let content = null;
@@ -119,9 +168,9 @@ import $ from "jquery";
                 </Link>
                 <Button variant="dark" onClick = {function(){log_out()}} style = {{borderRadius: '30px', fontWeight : 'bold', textAlign : 'right', float : 'right'}}>로그아웃</Button>
             </div>
-            <form>
-
-            </form>
+            <div id='getSecu'>
+              {getSecu()}
+            </div>
           </>       
     }
     

@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 import $ from "jquery";
 
 async function SelectBoXGet() {
-
   let username = {ID : localStorage.getItem('logInUserId')};
   await axios.post('http://127.0.0.1:8000/SelectBoxGet', username) 
             .then(response => {
@@ -23,15 +22,11 @@ async function SelectBoXGet() {
             })
             .catch(err => {        
               console.log(err);
-              alert('서버 추가에 실패하였습니다.');
-              window.location.replace();
-            })
-            const box = ['white', 'red', 'black', 'yellow'];  // 받은 데이터를 여기에다가 대입 해줘야한다.
-            useEffect(() => {
-              for (let i = 0; i < box.length; i++) {
-                $("#host_box").append("<option value='"+ i +"'>"+ box[i] + "</option>"); 
-              }
-            });
+              const box = ['All', 'white', 'red', 'black', 'yellow', 'blue'];  // 받은 데이터를 여기에다가 대입 해줘야한다.
+                   for (let i = 0; i < box.length; i++) {
+                  $("#host_box").append("<option value='"+ i +"'>"+ box[i] + "</option>"); 
+                }
+            })     
     }
 
 function url_group1(){ //url_group1 ~ 21까지 모니터링에 필요한 UI 임베디드
@@ -103,11 +98,7 @@ function url_group9(){
           url = url + localStorage.getItem("logInUserId")
           url = url + "&var-Host="
           url = url + "dongguk"
-<<<<<<< HEAD
-          url = url + "&var-Filesystem=All&var-Network=All&theme=dark&panelId=22"
-=======
           url = url + "&var-Filesystem=All&var-Network=All&panelId=22"
->>>>>>> ecc601d9e1b9f79c980f46b2a21de6397718906f
           return url;
           }
 function url_group10(){
@@ -302,12 +293,12 @@ function url_group21(){
 
             <div>
               <label style ={{fontWeight:'bold', fontSize:'25px', marginRight : '20px', marginTop:'10px', marginBottom : '10px'}}>호스트 목록</label>
-              <select id='host_box' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '40px', borderStyle : 'solid', borderColor:'black'}}>
+              <select name = 'host_box' id = 'host_box' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '40px', borderStyle : 'solid', borderColor:'black'}}>
 
               </select>
             </div>
 
-            {/* <div className='grafana'>
+            <div className='grafana'>
             <iframe id='frame1' className='iframe_small'
                src = {url_group1()}
                width="300px"
@@ -429,16 +420,17 @@ function url_group21(){
                height="500px"
             ></iframe>
              </div> 
-            </div>  */}
+            </div> 
           </>       
     }
     
   }
 logged_in();
+SelectBoXGet();
 
 
 function LoginPage() {
-  SelectBoXGet();
+ 
     return (
         <div className="MigHelper">
         <body class="sb-nav-fixed">

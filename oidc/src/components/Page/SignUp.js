@@ -23,14 +23,14 @@ async function makeUser(){ // await 사용하기위해 async 사용
     
     await axios.post('http://127.0.0.1:8000/accounts/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
             .then(response => {
-              alert('회원가입이 완료되었습니다.');
-              window.location.href = "/Dashboard";
-            })
-            .catch(err => {
-              console.log(err);
-              alert('회원가입이 실패하였습니다.');
-              window.location.href = "/Dashboard";
-            })
+                alert('회원가입이 완료되었습니다.');
+                window.location.href = "/Dashboard";
+              })
+              .catch(err => {
+                console.log(err);
+                alert('회원가입이 실패하였습니다.');
+                window.location.href = "/Dashboard";
+              })
     }
 
     let content = <>
