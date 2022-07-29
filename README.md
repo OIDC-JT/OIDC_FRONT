@@ -57,3 +57,7 @@
     
     13. SignUp.js : 클라이언트가 Server Dashboard, Security Dashboard를 사용하기 위한 회원가입 기능을 제공하는 페이지
     
+### 4. 프로젝트 진행시 참고 자료
+    1. Grafana panel embed : https://m.blog.naver.com/PostView.naver?blogId=pcmola&logNo=222368776526&categoryNo=48&proxyReferer=
+    
+    
