@@ -11,23 +11,35 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
-    let content = <>
+    function OS_Select() {
+        if (localStorage.getItem("batchsecuOS") == 'Centos') {
+         let content = <>
          <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
             <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
-              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>아래의 batch 파일을 서버에 설치하여 실행해주세요. </Card.Title>
-              
+              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>추가하려는 Server에 아래 명령어를 순서대로 입력하여 batch 파일을 서버에 다운로드/실행해주세요.</Card.Title>
               <hr></hr> 
               <>
                 <div classname="mb-3" style = {{textAlign:'center'}}>
-                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>S3 URL : </label> 
-                    <a id = 'S3_URL' href = {localStorage.getItem('S3_TEMP')} target='_blank' font Size = '50px'>{localStorage.getItem('S3_TEMP')}</a> 
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>1. curl-O https://kr.object.ncloudstorage.com/oidc-security/{localStorage.getItem("logInUserId") + "_" + localStorage.getItem("batchsecu")}_cInt.c </label> 
                 </div>
 
                 <div classname="mb-3" style = {{textAlign:'center'}}>
-                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>설치 후 완료 버튼을 클릭해주세요.</label>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>2. curl-O https://kr.object.ncloudstorage.com/oidc-security/{localStorage.getItem("logInUserId") + "_" + localStorage.getItem("batchsecu")}_test.bat</label> 
+                </div>
+
+                <div classname="mb-3" style = {{textAlign:'center'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>3. chmod 755 {localStorage.getItem("logInUserId") + " " + localStorage.getItem("batchsecu")}_test.bat</label> 
+                </div>
+
+                <div classname="mb-3" style = {{textAlign:'center'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>4. ./{localStorage.getItem("logInUserId") + " " + localStorage.getItem("batchsecu")}_test.bat</label> 
+                </div>
+
+                <div classname="mb-3" style = {{textAlign:'center'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>보안 Virus 검사는 매일 00시에 실행되며, 검사가 끝난 후 'Iaas Security Management Service'에서 결과 확인이 가능합니다.</label>
                 </div>
                 <div style = {{textAlign:'center'}}>
-                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>(설치한 서버가 목록에 없을 시 새로고침을 해주세요.)</label>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>Server 환경에 따라 검사 시간이 다르게 소요됩니다. </label>
                 </div>
 
                 <div classname="d-grid" style={{textAlign : 'center'}}>
@@ -46,7 +58,62 @@ import $ from "jquery";
                 </>
             </Card.Body>  
           </Card>
-    </>
+         </>
+             return content;
+        }
+
+        else {
+
+            let content = <>
+            <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
+               <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
+                 <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>추가하려는 Server에 아래 명령어를 순서대로 입력하여 batch 파일을 서버에 다운로드/실행해주세요.</Card.Title>
+                 <hr></hr> 
+                 <>
+                   <div classname="mb-3" style = {{textAlign:'center'}}>
+                       <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>1. wget-O https://kr.object.ncloudstorage.com/oidc-security/{localStorage.getItem("logInUserId") + "_" + localStorage.getItem("batchsecu")}_cInt.c </label> 
+                   </div>
+   
+                   <div classname="mb-3" style = {{textAlign:'center'}}>
+                       <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>2. wget-O https://kr.object.ncloudstorage.com/oidc-security/{localStorage.getItem("logInUserId") + "_" + localStorage.getItem("batchsecu")}_test.bat</label> 
+                   </div>
+   
+                   <div classname="mb-3" style = {{textAlign:'center'}}>
+                       <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>3. chmod 755 {localStorage.getItem("logInUserId") + " " + localStorage.getItem("batchsecu")}_test.bat</label> 
+                   </div>
+   
+                   <div classname="mb-3" style = {{textAlign:'center'}}>
+                       <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', width : '800px' }}>4. ./{localStorage.getItem("logInUserId") + " " + localStorage.getItem("batchsecu")}_test.bat</label> 
+                   </div>
+   
+                   <div classname="mb-3" style = {{textAlign:'center'}}>
+                       <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>보안 Virus 검사는 매일 00시에 실행되며, 검사가 끝난 후 'Iaas Security Management Service'에서 결과 확인이 가능합니다.</label>
+                   </div>
+                   <div style = {{textAlign:'center'}}>
+                       <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>Server 환경에 따라 검사 시간이 다르게 소요됩니다. </label>
+                   </div>
+   
+                   <div classname="d-grid" style={{textAlign : 'center'}}>
+                       <span></span>
+                       <Link to = "/SecuServerAdd">
+                           <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width : '200px'}}>다른 서버 추가하기</Button> 
+                       </Link>
+                   </div>
+   
+                   <div classname="d-grid" style={{textAlign : 'center'}}>
+                       <span></span>
+                       <Link to = "/LoginPageSecu">
+                           <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width:'200px'}}>완 료</Button> 
+                       </Link>
+                   </div>
+                   </>
+               </Card.Body>  
+             </Card>
+            </>
+            return content;
+        }
+    }
+
 
 function BatchInstallSecu() {
     
@@ -65,7 +132,7 @@ function BatchInstallSecu() {
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">서버 추가하기</li>
                         </ol>
-                        {content}
+                        {OS_Select()}
                         <br></br>
                     </div>
                 </main>
@@ -85,4 +152,3 @@ function BatchInstallSecu() {
 }
 
 export default BatchInstallSecu;
-

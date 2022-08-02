@@ -18,18 +18,26 @@ async function makeServer(){ // await 사용하기위해 async 사용
     const ServerName = document.getElementById("server_name").value; // 재찬이 ppt 상에서는 ServerName 입력은 따로 없었지만 우선 추가해봤습니다.
     const ID = localStorage.getItem("logInUserId");
 
-    let list_data = {username:ID, servertype:ServerType, servername:ServerName}; // JSON으로 전달
+    console.log(ServerType);
+    console.log(ServerName);
+    console.log(ID);
 
-    await axios.post('http://127.0.0.1:8000/accounts/login/SecuServerAdd', list_data) // ServerAdd라는 url을 임시적으로 지정해봤습니다.
+    let list_data = {servertype:ServerType, servername:ServerName}; // JSON으로 전달
+    console.log(list_data);
+    await axios.post('http://127.0.0.1:8000/securitybatch/', list_data, {
+            headers: {Authorization: `${localStorage.getItem('auth')}`},
+            }) // ServerAdd라는 url을 임시적으로 지정해봤습니다.
             .then(response => {
               console.log(response)
-              alert('서버 추가가 완료되었습니다.');
-              window.location.href = "/BatchInstallSecu"; //성공했을 때, 배치파일을 다운로드 받을 수 있도록 연결해준다.
+              alert('서버 추가가 완료되었습니다.'); //성공했을 때, 배치파일을 다운로드 받을 수 있도록 연결해준다.
+              localStorage.setItem("batchsecu", list_data.servername)
+              localStorage.setItem("batchsecuOS", list_data.servertype)
+              window.location.href = "/BatchInstallSecu";
             })
             .catch(err => {        
               console.log(err);
               alert('서버 추가에 실패하였습니다.');
-              window.location.href = "/BatchInstallSecu";//실패했을 때, 오류메세지와 함께 새로고침하도록 수정해야함.
+              window.location.reload(); //실패했을 때, 오류메세지와 함께 새로고침하도록 수정해야함.
             })
     }
 
@@ -45,9 +53,8 @@ async function makeServer(){ // await 사용하기위해 async 사용
                 </div>
 
                 <div>
-                    <select name='OS_ver' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '30px', borderStyle : 'solid', borderColor:'black'}}>
-                       <option value="Centos7">Centos7</option>
-                       <option value="Centos6">Centos6</option>
+                    <select id='OS_ver' style={{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '30px', borderStyle : 'solid', borderColor:'black'}}>
+                       <option value="Centos">Centos</option> {/*OS버전 선택 박스*/}
                        <option value="Ubuntu20.04">Ubuntu20.04 </option>
                        <option value="Ubuntu18.04">Ubuntu18.04</option>
                        <option value="Ubuntu16.04">Ubuntu16.04</option>
@@ -58,7 +65,7 @@ async function makeServer(){ // await 사용하기위해 async 사용
                     <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>Server Name : </label>
                 </div>
                 <div>
-                    <input   style = {{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '30px', borderStyle : 'solid', borderColor:'black'}} id = 'server_name' type="text" classname="form-control" placeholder="Enter ServerName" />
+                    <input  style = {{width : '260px', marginBottom : '10px', borderRadius : '20px', height : '30px', borderStyle : 'solid', borderColor:'black'}} id = 'server_name' type="text" classname="form-control" placeholder="Enter ServerName" />
                 </div>
                 
                 <div classname="d-grid" style={{textAlign : 'center'}}>
@@ -70,7 +77,7 @@ async function makeServer(){ // await 사용하기위해 async 사용
 
                 <div classname="d-grid" style={{textAlign : 'center'}}>
                     <span></span>
-                    <Link to = "/LoginPageSecu">
+                    <Link to = "/LoginPage">
                         <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width : '130px'}}>로그인 페이지</Button> 
                     </Link>
                 </div>
@@ -92,7 +99,7 @@ function ServerAddSecu() {
                 <div id="layoutSidenav_content">
                     <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Security Server-Add</h1>
+                        <h1 class="mt-4">Server-Add</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">서버 추가하기</li>
                         </ol>
@@ -116,5 +123,4 @@ function ServerAddSecu() {
 }
 
 export default ServerAddSecu;
-
 
