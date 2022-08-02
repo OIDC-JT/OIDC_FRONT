@@ -17,7 +17,7 @@ if(localStorage.getItem("batchOS") == 'Centos7' || localStorage.getItem("batchOS
     content = <>
          <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
             <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
-              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>추가하려는 서버에 아래의 명령어를 순서대로 입력하여 배치 파일을 다운로드/실행해 주시길 바랍니다.</Card.Title>
+              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>추가하려는 서버에 아래의 명령어를 순서대로 입력하여서 배치 파일을 다운로드/실행해 주시길 바랍니다.</Card.Title>
               
               <hr></hr> 
               <>
@@ -32,7 +32,15 @@ if(localStorage.getItem("batchOS") == 'Centos7' || localStorage.getItem("batchOS
                     <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>3. ./{localStorage.getItem("batch")}.bat</label>
                 </div>
                 <br></br>
-                <h6 style={{color:"red"}}>반드시 배치파일을 다운로드 및 실행한 이후에 완료버튼을 클릭해주세요. (완료버튼 클릭 후 모니터링 등록시간이 30초~5분 가량 소요됩니다.)</h6>
+
+                <div style = {{textAlign:'center'}}>
+                <h6 style={{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>반드시 배치파일을 다운로드 및 실행한 이후에 완료버튼을 클릭해주세요.</h6>
+                </div>
+
+                <div style = {{textAlign:'center'}}>
+                <h6 style={{fontWeight : 'bold', fontSize : '20px', marginBottom : '20px', color: "red" }}>(완료버튼 클릭 후 모니터링 등록시간이 30초~5분 가량 소요됩니다.)</h6>
+                </div>
+               
                 <div classname="d-grid" style={{textAlign : 'center'}}>
                     <span></span>
                     <Link to = "/ServerAdd">
