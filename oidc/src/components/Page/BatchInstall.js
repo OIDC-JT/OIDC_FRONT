@@ -11,25 +11,28 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
-    let content = <>
+let content = null
+console.log(localStorage.getItem("batchOS"))
+if(localStorage.getItem("batchOS") == 'Centos7' || localStorage.getItem("batchOS") == 'Centos6'){
+    content = <>
          <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
             <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
-              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>아래의 batch 파일을 서버에 설치하여 실행해주세요. </Card.Title>
+              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>추가하려는 서버에 아래의 명령어를 순서대로 입력하여 배치 파일을 다운로드/실행해 주시길 바랍니다.</Card.Title>
               
               <hr></hr> 
               <>
                 <div classname="mb-3" style = {{textAlign:'center'}}>
-                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>S3 URL : </label> 
-                    <a id = 'S3_URL' href = {`https://kr.object.ncloudstorage.com/oidc/${localStorage.getItem('logInUserId')}.bat`} target='_blank' font Size = '50px'>배치파일 다운로드</a> 
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>1. curl -O https://kr.object.ncloudstorage.com/oidc/{localStorage.getItem("batch")}.bat</label>  
                 </div>
 
                 <div classname="mb-3" style = {{textAlign:'center'}}>
-                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>설치 후 완료 버튼을 클릭해주세요.</label>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>2. chmod 755 {localStorage.getItem("batch")}.bat</label>
                 </div>
                 <div style = {{textAlign:'center'}}>
-                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px', color: "red" }}>(설치한 서버가 목록에 없을 시 새로고침을 해주세요.)</label>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>3. ./{localStorage.getItem("batch")}.bat</label>
                 </div>
-
+                <br></br>
+                <h6 style={{color:"red"}}>반드시 배치파일을 다운로드 및 실행한 이후에 완료버튼을 클릭해주세요. (완료버튼 클릭 후 모니터링 등록시간이 30초~5분 가량 소요됩니다.)</h6>
                 <div classname="d-grid" style={{textAlign : 'center'}}>
                     <span></span>
                     <Link to = "/ServerAdd">
@@ -47,7 +50,45 @@ import $ from "jquery";
             </Card.Body>  
           </Card>
     </>
+}
+else{
+    content = <>
+         <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
+            <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
+              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '30px', marginBottom : '15px', width : '800px'}}>추가하려는 서버에 아래의 명령어를 순서대로 입력하여 배치 파일을 다운로드/실행해 주시길 바랍니다.</Card.Title>
+              
+              <hr></hr> 
+              <>
+                <div classname="mb-3" style = {{textAlign:'center'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>1. wget https://kr.object.ncloudstorage.com/oidc/{localStorage.getItem("batch")}.bat</label> 
+                </div>
 
+                <div classname="mb-3" style = {{textAlign:'center'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>2. chmod 755 {localStorage.getItem("batch")}.bat</label>
+                </div>
+                <div style = {{textAlign:'center'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '20px', marginBottom : '5px'}}>3. ./{localStorage.getItem("batch")}.bat</label>
+                </div>
+                <br></br>
+                <h6 style={{color:"red"}}>반드시 배치파일을 다운로드 및 실행한 이후에 완료버튼을 클릭해주세요. (완료버튼 클릭 후 모니터링 등록시간이 30초~5분 가량 소요됩니다.)</h6>
+                <div classname="d-grid" style={{textAlign : 'center'}}>
+                    <span></span>
+                    <Link to = "/ServerAdd">
+                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width : '200px'}}>다른 서버 추가하기</Button> 
+                    </Link>
+                </div>
+
+                <div classname="d-grid" style={{textAlign : 'center'}}>
+                    <span></span>
+                    <Link to = "/LoginPage">
+                        <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold', marginTop:'10px', width:'200px'}}>완 료</Button> 
+                    </Link>
+                </div>
+                </>
+            </Card.Body>  
+          </Card>
+    </>
+}
 function BatchInstall() {
     
     return (

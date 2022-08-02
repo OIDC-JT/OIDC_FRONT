@@ -81,16 +81,7 @@ let json = [
     }
 
     function getSecu(){ // getSecu URL에서 사용자가 등록한 호스트에 대한 검사 결과를 django DB에서 가져온다.
-      axios.post('http://127.0.0.1:8000/getSecu', localStorage.getItem("logInUserId"))
-      .then(response => {
-        for(let i = 0; i < response.length; i++){
-          <div>
-            <p6>i.hostname</p6>
-            <p6>i.status</p6>
-          </div>
-        }
-      })
-      .catch(err => {
+      
         let aaa = ""
         console.log(json.length)
         for(let i = 0; i <json.length; i++){
@@ -108,12 +99,13 @@ let json = [
           }
         }
         $("#getSecu").append(aaa) 
-      })
+   
     }
     
   let content = null;
   
   function logged_in(){  // 로그인 여부를 판단하는 메인
+    
       if(localStorage.getItem("auth") == null){
         content = <>
           <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
@@ -179,7 +171,10 @@ logged_in();
 
 
 function LoginPageSecu() {
-
+  const iRunOnlyOnce = () => {
+    {getSecu()}
+  };
+  useEffect(iRunOnlyOnce, []);
     return (
         <div className="MigHelper">
         <body class="sb-nav-fixed">
