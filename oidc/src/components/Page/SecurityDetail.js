@@ -28,12 +28,42 @@ let json = [
     "status" : "Not Good"
   },
   {
-    "hostname": "abc4",
+    "hostname": "abc3",
     "status" : "Good"
   },
-] //더미데이터
+] 
 
-                  
+async function SecuInfo(){ // await 사용하기위해 async 사용
+
+  const ServerType = $("#OS_ver option:selected").val();
+  const ServerName = document.getElementById("server_name").value; // 재찬이 ppt 상에서는 ServerName 입력은 따로 없었지만 우선 추가해봤습니다.
+  const ID = localStorage.getItem("logInUserId");
+
+  console.log(ServerType);
+  console.log(ServerName);
+  console.log(ID);
+
+  let list_data = {servertype:ServerType, servername:ServerName}; // JSON으로 전달
+  console.log(list_data);
+  await axios.post('http://127.0.0.1:8000/securitybatch/', list_data, {
+          headers: {Authorization: `${localStorage.getItem('auth')}`},
+          }) // ServerAdd라는 url을 임시적으로 지정해봤습니다.
+          .then(response => {
+            console.log(response)
+            alert('서버 추가가 완료되었습니다.'); //성공했을 때, 배치파일을 다운로드 받을 수 있도록 연결해준다.
+            localStorage.setItem("batchsecu", list_data.servername)
+            localStorage.setItem("batchsecuOS", list_data.servertype)
+            window.location.href = "/BatchInstallSecu";
+          })
+          .catch(err => {        
+            console.log(err);
+            alert('서버 추가에 실패하였습니다.');
+            window.location.reload(); //실패했을 때, 오류메세지와 함께 새로고침하도록 수정해야함.
+          })
+  }
+
+
+
   async function signin(){ // await 사용하기위해 async 사용   로그인
 
     const Username = document.getElementById("signin_Username").value;
@@ -79,33 +109,10 @@ let json = [
             window.location.reload();
           })
     }
-
-    function getSecu(){ // getSecu URL에서 사용자가 등록한 호스트에 대한 검사 결과를 django DB에서 가져온다.
-      
-        let aaa = ""
-        console.log(json.length)
-        for(let i = 0; i <json.length; i++){
-          if (json[i].status == "Good") {
-            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
-            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
-            aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
-            aaa = aaa + "</div>"
-          }
-          else {
-            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
-            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
-            aaa = aaa + " <br><div style = 'width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><a href='/SecurityDetail' class='btn btn-danger'' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;'>Warning</a> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록이 표기됩니다.</div><br></div>"
-            aaa = aaa + "</div>"
-          }
-        }
-        $("#getSecu").append(aaa) 
-   
-    }
     
   let content = null;
   
   function logged_in(){  // 로그인 여부를 판단하는 메인
-    
       if(localStorage.getItem("auth") == null){
         content = <>
           <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
@@ -155,26 +162,29 @@ let json = [
         
         content = <>
             <div className='mb-3'>
-                <Link to = "/SecuServerAdd">
-                  <Button variant="dark" style = {{borderRadius: '30px', fontWeight : 'bold'}}>서버 추가하기</Button> 
-                </Link>
-                <Button variant="dark" onClick = {function(){log_out()}} style = {{borderRadius: '30px', fontWeight : 'bold', textAlign : 'right', float : 'right'}}>로그아웃</Button>
+                <Button variant="dark" onClick = {function(){log_out()}} style = {{borderRadius: '30px', fontWeight : 'bold'}}>로그아웃</Button>
             </div>
-            <div id='getSecu'>
-              {getSecu()}
-            </div>
+            <Card style={{ width: '80rem', height: '40rem', display: 'flex', position: 'relative', }}>
+            <Card.Body style = {{position: 'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
+              <Card.Title style = {{textAlign : 'center', fontWeight: 'bold', fontSize : '45px', marginBottom : '15px', width : '800px'}}>Security Governance</Card.Title>
+              <hr></hr> 
+              <>
+                <div classname="mb-3" style = {{textAlign:'center', marginBottom:'20px'}}>
+                    <label style = {{fontWeight : 'bold', fontSize : '25px', marginBottom : '5px' }}>저희 서비스를 이용해주셔서 감사합니다.</label>
+                    <span></span>
+                    <label style = {{fontWeight : 'bold', fontSize : '25px', marginBottom : '5px' }}>해당 파일들이 감염되어 있으니 참고하시기를 바랍니다.</label>
+                </div>
+                </>
+            </Card.Body>  
+          </Card>
           </>       
     }
-    
   }
 logged_in();
 
 
-function LoginPageSecu() {
-  const iRunOnlyOnce = () => {
-    {getSecu()}
-  };
-  useEffect(iRunOnlyOnce, []);
+function SecurityDetail() {
+
     return (
         <div className="MigHelper">
         <body class="sb-nav-fixed">
@@ -186,9 +196,9 @@ function LoginPageSecu() {
                 <div id="layoutSidenav_content">
                     <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">보안 대시보드</h1>
+                        <h1 class="mt-4">보안 상세내역</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">로그인</li>
+                            <li class="breadcrumb-item active">감염 파일 목록</li>
                         </ol>
                         {content}
                         <br></br>
@@ -209,4 +219,4 @@ function LoginPageSecu() {
     );
 }
 
-export default LoginPageSecu;
+export default SecurityDetail;
