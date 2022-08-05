@@ -21,7 +21,6 @@ async function SelectBoXGet() {
             },
             }) 
             .then(response => {
-              let box_list = [];
               const box = response.data.lists  // 받은 데이터를 여기에다가 대입 해줘야한다.
               box.splice(0, 0, 'ALL'); 
               localStorage.setItem("box", box);
@@ -527,8 +526,6 @@ function LoginPage() {
     {SelectBoXGet()}  //한번만 불러오게 해서 랜더링에 오류가 없도록 하기 위해 useEffect사용
   };
   useEffect(iRunOnlyOnce, []);
-
- 
 
     return (
         <div className="MigHelper">
