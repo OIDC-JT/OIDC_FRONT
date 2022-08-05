@@ -406,6 +406,7 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>
             </div>
+            <br></br>
             <div className='grafana'>
             <iframe id='frame4' className='iframe_mid'
                src = {url_group4(selected_Host)}
@@ -418,6 +419,7 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>   
             </div>
+            <br></br>
             <div className='grafana'>
             <iframe id='frame6' className='iframe_small'
                src = {url_group6(selected_Host)}
@@ -435,6 +437,7 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>
             </div> 
+            <br></br>
             <div className='grafana'>
             <iframe id='frame9' className='iframe_small'
                src = {url_group9(selected_Host)}
@@ -452,6 +455,7 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>
             </div> 
+            <br></br>
             <div className='grafana'>
             <iframe id='frame12' className='iframe_mid'
                src = {url_group12(selected_Host)}
@@ -464,6 +468,7 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>
             </div>
+            <br></br>
             <div className='grafana'>
             <iframe id='frame14' className='iframe_mid'
                src = {url_group14(selected_Host)}
@@ -475,6 +480,8 @@ function url_group21(selected_Host){
                width="300px"
                height="200px"
             ></iframe>
+            </div>
+            <br></br>
             <div className='grafana'>
             <iframe id='frame16' className='iframe_small'
                src = {url_group16(selected_Host)}
@@ -492,6 +499,7 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>
             </div>
+            <br></br>
             <div className='grafana'>
             <iframe id='frame19' className='iframe_mid'
                src = {url_group19(selected_Host)}
@@ -504,14 +512,14 @@ function url_group21(selected_Host){
                height="200px"
             ></iframe>
             </div>
+            <br></br>
             <div className='grafana'>
             <iframe id='frame21' className='iframe_big'
                src = {url_group21(selected_Host)}
                width="300px"
                height="500px"
             ></iframe>
-             </div> 
-            </div> 
+             </div>  
           </>       
           return content;
     }

@@ -169,6 +169,9 @@ let Global_secu_virus_list;
         for (let i = 0; i < localStorage.getItem("security_host_num"); i++) {
           if (json[i].hostname == Selected_secu) { //현재 selectbox에서 선택한 호스트를 탐색
             virus_sum = json[i].virus_sum;
+          }
+          else {
+            virus_sum = 0;
           } 
         }
         

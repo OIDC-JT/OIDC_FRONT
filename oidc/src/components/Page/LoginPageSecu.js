@@ -62,9 +62,10 @@ let json;
     }
     async function getSecurity() { // json을 받아서 화면에 parsing해주는 함수!
       const username = localStorage.getItem("logInUserId");
-      axios.post('http://127.0.0.1:8000/GetSecurity/', username)
+      const data = {"username" : username}
+      axios.post('http://127.0.0.1:8080/securitytxt/', JSON.stringify(data))
         .then(response => {
-          console.log(123);
+          alert(JSON.stringify(response.data));
         })
         .catch(err => { // api 없는 경우를 가정해서 구현하는중
           let dummyJson =  [{ "hostname": "abc1",  "virus" : "", "virus_sum" : "0" }, {"hostname" : "abc2", "virus" : "virus1,virus2" ,"virus_sum" : "2" }, { "hostname": "abc3", "virus" : "virus3,virus4,virus5", "virus_sum" : "3" }, { "hostname": "abc4", "virus" : "",  "virus_sum" : "0"}]; //더미데이터
@@ -73,22 +74,17 @@ let json;
 
           if (json.length == 0) { // api json을 받아보니 길이가 0. 즉, username이 포함된 txt파일이 존재하지 않는 것
            let aaa = ""
-           aaa = aaa + ' <Card style = " width: 80rem, height: 40rem, display: flex, position: relative ">'
-           aaa = aaa + ' <Card.Body style = "position: absolute, top:50%, left:50%, transform: translate(-50%, -50%)"> '
-           aaa = aaa + ' <hr></hr> '
-           aaa = aaa + ' <div classname="mb-3" style="text-align: center; margin-bottom: 20px">'
-           aaa = aaa + ' <label style="font-weight: bold; font-size: 25px; margin-bottom: 5px;">저희 서비스를 이용해주셔서 감사합니다.</label>'
+           aaa = aaa + ' <div class = "card" style = "width: 100%; height: 40rem; display: flex; position: relative; ">'
+           aaa = aaa + ' <div class="card-body" style = "position: absolute; top:50%; left:50%; transform: translate(-50%, -50%);"> '
+           aaa = aaa + ' <div class="card-title  mb-3" style = "text-align : center; font-weight: bold; font-size : 40px;">Security Governance</div>'
+           aaa = aaa + ' <hr></hr>'
+           aaa = aaa + ' <div class="mb-3" style = "text-align:center; margin-bottom:20px;">'
            aaa = aaa + ' <span></span>'
-           aaa = aaa + ' <label style="font-weight: bold; font-size: 25px; margin-bottom: 5px;">해당 파일들이 감염되어 있으니 참고하시기를 바랍니다.</label>'
-           aaa = aaa + ' <hr />'
+           aaa = aaa + ' <label style = "font-weight : bold; font-size : 25px; margin-bottom : 5px;">검사 완료 항목이 존재하지 않습니다.</label>'
+           aaa = aaa + ' <label style = "font-weight : bold; font-size : 25px; margin-bottom : 5px;">서버를 추가하셨을 경우 00시 이후에 결과가 출력됩니다.</label>'
            aaa = aaa + ' </div>'
-           aaa = aaa + ' <div id="virus_sum" classname="mb-3" style="text-align: center">'
-           aaa = aaa + ' <label style="font-weight: bold; font-size: 25px; margin-bottom: 5px;" >바이러스 :개 검출</label></div>'
-           aaa = aaa + ' <div id="virus_list"classname="mb-3"style="text-align: center">'
-           aaa = aaa + ' <label style="font-weight: bold;font-size: 25px;margin-bottom: 5px;">바이러스 파일 목록</label>'
-           aaa = aaa + ' <span></span>'
            aaa = aaa + ' </div>'
-           aaa = aaa + ' <div id="secu_virus_list"classname="mb-3"style="text-align: center;font-weight: bold;font-size: 25px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px;"></div>'
+           aaa = aaa + ' </div>'
             $("#getSecu").append(aaa);
           }
           else { // json을 받아보니 txt가 존재해서 검사를 하여서 parsing하는 부분!
