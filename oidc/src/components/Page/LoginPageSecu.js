@@ -4,7 +4,7 @@ import Navbar from '../navBar';
 import Footer from '../footer';
 import SideMenu from '../sideMenu';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Component} from "react";
 import axios from 'axios'
 import { format } from 'react-string-format';
 import Card from 'react-bootstrap/Card';
@@ -13,27 +13,8 @@ import Dashboard from './Dashboard';
 import { Link } from 'react-router-dom';
 import $ from "jquery";
 
-let json = [
-  {
-    "hostname": "abc1",
-    "status" : "Good",
-    "virus" : "",
-  },
-  {
-    "hostname": "abc2",
-    "status" : "Good"
-  },
-  {
-    "hostname": "abc3",
-    "status" : "Not Good"
-  },
-  {
-    "hostname": "abc4",
-    "status" : "Good"
-  },
-] //더미데이터
-
-                  
+let json;
+             
   async function signin(){ // await 사용하기위해 async 사용   로그인
 
     const Username = document.getElementById("signin_Username").value;
@@ -79,27 +60,57 @@ let json = [
             window.location.reload();
           })
     }
+    async function getSecurity() { // json을 받아서 화면에 parsing해주는 함수!
+      const username = localStorage.getItem("logInUserId");
+      axios.post('http://127.0.0.1:8000/GetSecurity/', username)
+        .then(response => {
+          console.log(123);
+        })
+        .catch(err => { // api 없는 경우를 가정해서 구현하는중
+          let dummyJson =  [{ "hostname": "abc1",  "virus" : "", "virus_sum" : "0" }, {"hostname" : "abc2", "virus" : "virus1,virus2" ,"virus_sum" : "2" }, { "hostname": "abc3", "virus" : "virus3,virus4,virus5", "virus_sum" : "3" }, { "hostname": "abc4", "virus" : "",  "virus_sum" : "0"}]; //더미데이터
+          json = dummyJson;
+          localStorage.setItem("JSON", JSON.stringify(dummyJson));
 
-    function getSecu(){ // getSecu URL에서 사용자가 등록한 호스트에 대한 검사 결과를 django DB에서 가져온다.
-      
-        let aaa = ""
-        console.log(json.length)
-        for(let i = 0; i <json.length; i++){
-          if (json[i].status == "Good") {
-            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
-            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
-            aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
-            aaa = aaa + "</div>"
+          if (json.length == 0) { // api json을 받아보니 길이가 0. 즉, username이 포함된 txt파일이 존재하지 않는 것
+           let aaa = ""
+           aaa = aaa + ' <Card style = " width: 80rem, height: 40rem, display: flex, position: relative ">'
+           aaa = aaa + ' <Card.Body style = "position: absolute, top:50%, left:50%, transform: translate(-50%, -50%)"> '
+           aaa = aaa + ' <hr></hr> '
+           aaa = aaa + ' <div classname="mb-3" style="text-align: center; margin-bottom: 20px">'
+           aaa = aaa + ' <label style="font-weight: bold; font-size: 25px; margin-bottom: 5px;">저희 서비스를 이용해주셔서 감사합니다.</label>'
+           aaa = aaa + ' <span></span>'
+           aaa = aaa + ' <label style="font-weight: bold; font-size: 25px; margin-bottom: 5px;">해당 파일들이 감염되어 있으니 참고하시기를 바랍니다.</label>'
+           aaa = aaa + ' <hr />'
+           aaa = aaa + ' </div>'
+           aaa = aaa + ' <div id="virus_sum" classname="mb-3" style="text-align: center">'
+           aaa = aaa + ' <label style="font-weight: bold; font-size: 25px; margin-bottom: 5px;" >바이러스 :개 검출</label></div>'
+           aaa = aaa + ' <div id="virus_list"classname="mb-3"style="text-align: center">'
+           aaa = aaa + ' <label style="font-weight: bold;font-size: 25px;margin-bottom: 5px;">바이러스 파일 목록</label>'
+           aaa = aaa + ' <span></span>'
+           aaa = aaa + ' </div>'
+           aaa = aaa + ' <div id="secu_virus_list"classname="mb-3"style="text-align: center;font-weight: bold;font-size: 25px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px;"></div>'
+            $("#getSecu").append(aaa);
           }
-          else {
-            aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
-            aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
-            aaa = aaa + " <br><div style = 'width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><a href='/SecurityDetail' class='btn btn-danger'' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;'>Warning</a> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록이 표기됩니다.</div><br></div>"
-            aaa = aaa + "</div>"
+          else { // json을 받아보니 txt가 존재해서 검사를 하여서 parsing하는 부분!
+            let aaa = ""
+            console.log(json.length)
+            for(let i = 0; i <json.length; i++){
+            if (json[i].virus_sum == "0") {
+              aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+              aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
+              aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
+              aaa = aaa + "</div>"
+            }
+            else {
+              aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+              aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
+              aaa = aaa + ' <br><div style = "width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;"><a onclick="button1_click();" href="/SecurityDetail" class="btn btn-danger" style = "font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;">Warning</a> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록으로 이동합니다.</div><br></div>'
+              aaa = aaa + "</div>"
+            }
           }
-        }
-        $("#getSecu").append(aaa) 
-   
+          $("#getSecu").append(aaa) 
+          }  
+        })
     }
     
   let content = null;
@@ -161,8 +172,9 @@ let json = [
                 <Button variant="dark" onClick = {function(){log_out()}} style = {{borderRadius: '30px', fontWeight : 'bold', textAlign : 'right', float : 'right'}}>로그아웃</Button>
             </div>
             <div id='getSecu'>
-              {getSecu()}
+              
             </div>
+            
           </>       
     }
     
@@ -172,9 +184,10 @@ logged_in();
 
 function LoginPageSecu() {
   const iRunOnlyOnce = () => {
-    {getSecu()}
+    {getSecurity()}
   };
   useEffect(iRunOnlyOnce, []);
+      
     return (
         <div className="MigHelper">
         <body class="sb-nav-fixed">
@@ -204,6 +217,7 @@ function LoginPageSecu() {
             <script src="assets/demo/chart-bar-demo.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
             <script src="js/datatables-simple-demo.js"></script>
+            
         </body>
         </div>
     );
