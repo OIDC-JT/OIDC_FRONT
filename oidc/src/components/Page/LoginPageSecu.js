@@ -14,7 +14,16 @@ import { Link } from 'react-router-dom';
 import $ from "jquery";
 
 let json;
-             
+          
+function objToString (obj) {
+  var str = '';
+  for (var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+          str += p + '::' + obj[p] + '\n';
+      }
+  }
+  return str;
+}
   async function signin(){ // await 사용하기위해 async 사용   로그인
 
     const Username = document.getElementById("signin_Username").value;
@@ -63,49 +72,51 @@ let json;
     async function getSecurity() { // json을 받아서 화면에 parsing해주는 함수!
       const username = localStorage.getItem("logInUserId");
       const data = {"username" : username}
-      axios.post('http://127.0.0.1:8080/securitytxt/', JSON.stringify(data))
+      await axios.post('http://127.0.0.1:8080/securitytxt/', data)
         .then(response => {
-          alert(JSON.stringify(response.data));
+             //let dummyJson =  [{ "hostname": "abc1",  "virus" : "", "virus_sum" : "0" }, {"hostname" : "abc2", "virus" : "virus1,virus2" ,"virus_sum" : "2" }, { "hostname": "abc3", "virus" : "virus3,virus4,virus5", "virus_sum" : "3" }, { "hostname": "abc4", "virus" : "",  "virus_sum" : "0"}]; //더미데이터
+             let dummyJson = (response.data);
+            
+             json = dummyJson;
+           
+             localStorage.setItem("JSON", JSON.stringify(dummyJson));
+   
+             if (json.hostname.length == 0) { // api json을 받아보니 길이가 0. 즉, username이 포함된 txt파일이 존재하지 않는 것
+              let aaa = ""
+              aaa = aaa + ' <div class = "card" style = "width: 100%; height: 40rem; display: flex; position: relative; ">'
+              aaa = aaa + ' <div class="card-body" style = "position: absolute; top:50%; left:50%; transform: translate(-50%, -50%);"> '
+              aaa = aaa + ' <div class="card-title  mb-3" style = "text-align : center; font-weight: bold; font-size : 40px;">Security Governance</div>'
+              aaa = aaa + ' <hr></hr>'
+              aaa = aaa + ' <div class="mb-3" style = "text-align:center; margin-bottom:20px;">'
+              aaa = aaa + ' <span></span>'
+              aaa = aaa + ' <label style = "font-weight : bold; font-size : 25px; margin-bottom : 5px;">검사 완료 항목이 존재하지 않습니다.</label>'
+              aaa = aaa + ' <label style = "font-weight : bold; font-size : 25px; margin-bottom : 5px;">서버를 추가하셨을 경우 00시 이후에 결과가 출력됩니다.</label>'
+              aaa = aaa + ' </div>'
+              aaa = aaa + ' </div>'
+              aaa = aaa + ' </div>'
+               $("#getSecu").append(aaa);
+             }
+             else { // json을 받아보니 txt가 존재해서 검사를 하여서 parsing하는 부분!
+               let aaa = ""
+               console.log(json.hostname.length)
+               for(let i = 0; i <json.hostname.length; i++){
+               if (json.virus_sum[i] == "0") {
+                 aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+                 aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json.hostname[i] + "</p6></div><hr></hr>"
+                 aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
+                 aaa = aaa + "</div>"
+               }
+               else {
+                 aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
+                 aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json.hostname[i] + "</p6></div><hr></hr>"
+                 aaa = aaa + ' <br><div style = "width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;"><a onclick="button1_click();" href="/SecurityDetail" class="btn btn-danger" style = "font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;">Warning</a> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록으로 이동합니다.</div><br></div>'
+                 aaa = aaa + "</div>"
+               }
+             }
+             $("#getSecu").append(aaa) 
+             }  
         })
         .catch(err => { // api 없는 경우를 가정해서 구현하는중
-          let dummyJson =  [{ "hostname": "abc1",  "virus" : "", "virus_sum" : "0" }, {"hostname" : "abc2", "virus" : "virus1,virus2" ,"virus_sum" : "2" }, { "hostname": "abc3", "virus" : "virus3,virus4,virus5", "virus_sum" : "3" }, { "hostname": "abc4", "virus" : "",  "virus_sum" : "0"}]; //더미데이터
-          json = dummyJson;
-          localStorage.setItem("JSON", JSON.stringify(dummyJson));
-
-          if (json.length == 0) { // api json을 받아보니 길이가 0. 즉, username이 포함된 txt파일이 존재하지 않는 것
-           let aaa = ""
-           aaa = aaa + ' <div class = "card" style = "width: 100%; height: 40rem; display: flex; position: relative; ">'
-           aaa = aaa + ' <div class="card-body" style = "position: absolute; top:50%; left:50%; transform: translate(-50%, -50%);"> '
-           aaa = aaa + ' <div class="card-title  mb-3" style = "text-align : center; font-weight: bold; font-size : 40px;">Security Governance</div>'
-           aaa = aaa + ' <hr></hr>'
-           aaa = aaa + ' <div class="mb-3" style = "text-align:center; margin-bottom:20px;">'
-           aaa = aaa + ' <span></span>'
-           aaa = aaa + ' <label style = "font-weight : bold; font-size : 25px; margin-bottom : 5px;">검사 완료 항목이 존재하지 않습니다.</label>'
-           aaa = aaa + ' <label style = "font-weight : bold; font-size : 25px; margin-bottom : 5px;">서버를 추가하셨을 경우 00시 이후에 결과가 출력됩니다.</label>'
-           aaa = aaa + ' </div>'
-           aaa = aaa + ' </div>'
-           aaa = aaa + ' </div>'
-            $("#getSecu").append(aaa);
-          }
-          else { // json을 받아보니 txt가 존재해서 검사를 하여서 parsing하는 부분!
-            let aaa = ""
-            console.log(json.length)
-            for(let i = 0; i <json.length; i++){
-            if (json[i].virus_sum == "0") {
-              aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
-              aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
-              aaa = aaa + " <br><div style = 'width : 600px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;'><button type='button' class='btn btn-success' style = 'font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;' >Good</button> 바이러스가 발견되지 않았습니다.</div><br></div>"
-              aaa = aaa + "</div>"
-            }
-            else {
-              aaa = aaa + "<div style='border-style : solid; border-radius : 20px; margin-bottom : 10px;' >"
-              aaa = aaa + " <div><div style='margin-top : 12px;'><p6 style='font-weight : bold; margin-left : 20px; font-size: 20px;'>" + "HostName : "  + json[i].hostname + "</p6></div><hr></hr>"
-              aaa = aaa + ' <br><div style = "width : 1000px; margin-bottom : 12px; margin-left : 8px; font-weight : bold; font-size : 20px;"><a onclick="button1_click();" href="/SecurityDetail" class="btn btn-danger" style = "font-weight : bold; width : 200px; border-radius : 10px; font-size : 20px; margin-left : 10px;">Warning</a> 바이러스가 발견되었습니다. Warning 버튼 클릭 시 상세목록으로 이동합니다.</div><br></div>'
-              aaa = aaa + "</div>"
-            }
-          }
-          $("#getSecu").append(aaa) 
-          }  
         })
     }
     

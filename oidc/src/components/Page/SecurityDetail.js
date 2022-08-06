@@ -63,9 +63,9 @@ let Global_secu_virus_list;
     }
 
     function getSecurity() { // json을 받아서 화면에 parsing해주는 함수!
-          for (let i = 0; i < json.length; i++) {
-            if (json[i].virus_sum != 0) { // 바이러스가 존재할 경우 selectbox에 추가해준다.
-              $("#secu_host_box").append("<option value='"+ json[i].hostname +"'>"+ json[i].hostname + "</option>"); 
+          for (let i = 0; i < json.hostname.length; i++) {
+            if (json.virus_sum[i] != 0) { // 바이러스가 존재할 경우 selectbox에 추가해준다.
+              $("#secu_host_box").append("<option value='"+ json.hostname[i] +"'>"+ json.hostname[i] + "</option>"); 
             }
             printVirusList();
           } 
@@ -86,14 +86,13 @@ let Global_secu_virus_list;
     content = null; // 이거 없으면 화면이 여러개가 생기더라구요,,
     let first_host;
     let arr;
-    localStorage.setItem("security_host_num", json.length);
-    localStorage.setItem("security_json", json); 
-
+    localStorage.setItem("security_host_num", json.hostname.length);
+    
     for (let i = 0; i < localStorage.getItem("security_host_num"); i++) { // 처음 렌더링 됐을 때 첫번째 selectbox 목록에 대한 정보를 출력해주기 위함
-      if (json[i].virus_sum != 0) { // 처음으로 바이러스 있는 요소를 selectbox에서 보여줄 것이기 때문.
-        first_host = json[i].hostname;
-        arr = json[i].virus.split(",");
-        Global_secu_virus_list = arr;      
+      if (json.virus_sum[i] != 0) { // 처음으로 바이러스 있는 요소를 selectbox에서 보여줄 것이기 때문.
+        first_host = json.hostname[i];
+        arr = json.virus[i];
+        Global_secu_virus_list = arr;  
         break;
       }
       else {
@@ -108,8 +107,8 @@ let Global_secu_virus_list;
       
       setSelected_secu(e.target.value); // 사용자가 선택한 select 항목을 setSelected를 통해 Selected에 담아줍니다.
       for (let i = 0; i < localStorage.getItem("security_host_num"); i++) { // 바이러스 호스트 개수만큼 for문을 수행, 현재 선택한 요소의 virus 리스트를 확보한다.
-        if (json[i].hostname == e.target.value) { 
-          arr = json[i].virus.split(",");
+        if (json.hostname[i] == e.target.value) { 
+          arr = json.virus[i]
           Global_secu_virus_list = arr;
           //setSelected_secu_virus(arr);
           printVirusList();
@@ -167,12 +166,10 @@ let Global_secu_virus_list;
         let virus_sum;
 
         for (let i = 0; i < localStorage.getItem("security_host_num"); i++) {
-          if (json[i].hostname == Selected_secu) { //현재 selectbox에서 선택한 호스트를 탐색
-            virus_sum = json[i].virus_sum;
+          if (json.hostname[i] == Selected_secu) { //현재 selectbox에서 선택한 호스트를 탐색
+            virus_sum = json.virus_sum[i];
           }
-          else {
-            virus_sum = 0;
-          } 
+        
         }
         
         content = <>
