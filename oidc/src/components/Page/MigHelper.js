@@ -52,7 +52,7 @@ function MigHelper() {
     async function nbp_send_data(list){ // await 사용하기위해 async 사용
     
         let list_data = {list:list};
-        await axios.post('http://127.0.0.1:8000/', list_data) // post 수행 시, 계산 결과 값을 백앤드에서 return 받게 된다.
+        await axios.post('http://192.168.2.7:8000/', list_data) // post 수행 시, 계산 결과 값을 백앤드에서 return 받게 된다.
                 .then(response => { 
                     //console.log(response.data['results']); 
                      for (let i = 0; i < nbpTable; i++) {

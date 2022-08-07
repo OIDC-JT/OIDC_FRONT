@@ -15,7 +15,7 @@ import $ from "jquery";
 
 
 async function SelectBoXGet() {
-  await axios.get('http://127.0.0.1:8000/hostlist/', {
+  await axios.get('http://192.168.2.7:8000/hostlist/', {
             headers: {
               Authorization: `${localStorage.getItem('auth')}`
             },
@@ -38,27 +38,26 @@ async function SelectBoXGet() {
             })     
     }
 
-
 function all_url1(){
-  let url = "http://175.45.195.194:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
+  let url = "http://175.45.201.72:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
   url = url + localStorage.getItem("logInUserId") + "&var-Server=All&theme=dark&panelId=22"
 
   return url;
 }
 function all_url2(){
-  let url = "http://175.45.195.194:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
+  let url = "http://175.45.201.72:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
   url = url + localStorage.getItem("logInUserId") + "&var-Server=All&theme=dark&panelId=40&from=now-7d&to=now"
   
   return url;
 }  
 function all_url3(){
-  let url = "http://175.45.195.194:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
+  let url = "http://175.45.201.72:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
   url = url + localStorage.getItem("logInUserId") + "&var-Server=All&theme=dark&panelId=42&from=now-7d&to=now"
   
   return url;
 }  
 function all_url4(){
-  let url = "http://175.45.195.194:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
+  let url = "http://175.45.201.724:3000/d-solo/zEgAqHQnz/monitoring?orgId=1&refresh=30s&var-Grupo="
   url = url + localStorage.getItem("logInUserId") + "&var-Server=All&theme=dark&panelId=44&from=now-7d&to=now"
   console.log(url)
   return url;
@@ -66,7 +65,7 @@ function all_url4(){
 
 
 function url_group1(selected_Host){ //url_group1 ~ 21까지 모니터링에 필요한 UI 임베디드
-  let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+  let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
   url = url + localStorage.getItem("logInUserId")
   url = url + "&var-Host="
   url = url + selected_Host
@@ -74,7 +73,7 @@ function url_group1(selected_Host){ //url_group1 ~ 21까지 모니터링에 필�
   return url;
   }
 function url_group2(selected_Host){
-    let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+    let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
     url = url + localStorage.getItem("logInUserId")
     url = url + "&var-Host="
     url = url + selected_Host
@@ -82,7 +81,7 @@ function url_group2(selected_Host){
     return url;
     }
 function url_group3(selected_Host){
-      let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+      let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
       url = url + localStorage.getItem("logInUserId")
       url = url + "&var-Host="
       url = url + selected_Host
@@ -90,7 +89,7 @@ function url_group3(selected_Host){
       return url;
       }
 function url_group4(selected_Host){
-  let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+  let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
   url = url + localStorage.getItem("logInUserId")
   url = url + "&var-Host="
   url = url + selected_Host
@@ -98,7 +97,7 @@ function url_group4(selected_Host){
   return url;
   }
 function url_group5(selected_Host){
-      let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+      let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
       url = url + localStorage.getItem("logInUserId")
       url = url + "&var-Host="
       url = url + selected_Host
@@ -106,7 +105,7 @@ function url_group5(selected_Host){
       return url;
       } 
 function url_group6(selected_Host){
-        let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+        let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
         url = url + localStorage.getItem("logInUserId")
         url = url + "&var-Host="
         url = url + selected_Host
@@ -114,7 +113,7 @@ function url_group6(selected_Host){
         return url;
         }
 function url_group7(selected_Host){
-    let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+    let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
     url = url + localStorage.getItem("logInUserId")
     url = url + "&var-Host="
     url = url + selected_Host
@@ -122,7 +121,7 @@ function url_group7(selected_Host){
     return url;
     }
   function url_group8(selected_Host){
-        let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+        let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
         url = url + localStorage.getItem("logInUserId")
         url = url + "&var-Host="
         url = url + selected_Host
@@ -130,7 +129,7 @@ function url_group7(selected_Host){
         return url;
         } 
 function url_group9(selected_Host){
-          let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+          let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
           url = url + localStorage.getItem("logInUserId")
           url = url + "&var-Host="
           url = url + selected_Host
@@ -138,7 +137,7 @@ function url_group9(selected_Host){
           return url;
           }
 function url_group10(selected_Host){
-      let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+      let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
       url = url + localStorage.getItem("logInUserId")
       url = url + "&var-Host="
       url = url + selected_Host
@@ -146,7 +145,7 @@ function url_group10(selected_Host){
       return url;
       }
 function url_group11(selected_Host){
-          let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
+          let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&refresh=30s&var-Group="
           url = url + localStorage.getItem("logInUserId")
           url = url + "&var-Host="
           url = url + selected_Host
@@ -154,70 +153,70 @@ function url_group11(selected_Host){
           return url;
           } 
 function url_group12(selected_Host){
-            let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+            let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
             url = url + localStorage.getItem("logInUserId");
             url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=94"
             return url;
             }
           
 function url_group13(selected_Host){
-              let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+              let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
               url = url + localStorage.getItem("logInUserId");
               url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=95"
               return url;
               }
           
 function url_group14(selected_Host){
-              let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+              let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
               url = url + localStorage.getItem("logInUserId");
               url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=89"
               return url;
               }
           
 function url_group15(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=23"
                 return url;
               }
           
 function url_group16(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Host=dongguk&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=32"
                 return url;
               }
           
 function url_group17(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=96"
                 return url;
               }
           
 function url_group18(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=19"
                 return url;
               }
           
 function url_group19(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&panelId=18"
                 return url;
               }
           
 function url_group20(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&panelId=21"
                 return url;
               }
           
 function url_group21(selected_Host){
-                let url = "http://175.45.195.194:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
+                let url = "http://175.45.201.72:3000/d-solo/41URQF7mz/zabbix-full-server-status?orgId=1&var-Group="
                 url = url + localStorage.getItem("logInUserId");
                 url = url + "&var-Host=" + selected_Host + "&var-Disk=All&var-Filesystem=All&var-Network=All&theme=dark&panelId=17"
                 console.log(url)
@@ -232,7 +231,7 @@ function url_group21(selected_Host){
     
     let list_data = {username:Username, email:Email, password:Password};
 
-    await axios.post('http://127.0.0.1:8000/accounts/login/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
+    await axios.post('http://192.168.2.7:8000/accounts/login/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
             .then(response => {
               console.log(response);
               localStorage.setItem("logInUserId", response.data.user.username); // 현재 로그인한 유저 누군지 설정
@@ -255,7 +254,7 @@ function url_group21(selected_Host){
 
     async function log_out(){  //로그아웃
         let data = {refresh : localStorage.getItem("refresh")} 
-        await axios.post('http://127.0.0.1:8000/accounts/logout/', data)
+        await axios.post('http://192.168.2.7:8000/accounts/logout/', data)
         .then(response => {
             localStorage.clear("logInUserId")
             localStorage.clear("auth")

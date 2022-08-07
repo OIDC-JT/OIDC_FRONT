@@ -24,7 +24,7 @@ async function makeServer(){ // await 사용하기위해 async 사용
 
     let list_data = {servertype:ServerType, servername:ServerName}; // JSON으로 전달
     console.log(list_data);
-    await axios.post('http://127.0.0.1:8000/securitybatch/', list_data, {
+    await axios.post('http://192.168.2.7:8000/securitybatch/', list_data, {
             headers: {Authorization: `${localStorage.getItem('auth')}`},
             }) // ServerAdd라는 url을 임시적으로 지정해봤습니다.
             .then(response => {

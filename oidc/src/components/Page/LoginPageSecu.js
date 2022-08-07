@@ -15,15 +15,6 @@ import $ from "jquery";
 
 let json;
           
-function objToString (obj) {
-  var str = '';
-  for (var p in obj) {
-      if (obj.hasOwnProperty(p)) {
-          str += p + '::' + obj[p] + '\n';
-      }
-  }
-  return str;
-}
   async function signin(){ // await 사용하기위해 async 사용   로그인
 
     const Username = document.getElementById("signin_Username").value;
@@ -32,7 +23,7 @@ function objToString (obj) {
     
     let list_data = {username:Username, email:Email, password:Password};
 
-    await axios.post('http://127.0.0.1:8000/accounts/login/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
+    await axios.post('http://192.168.2.7:8000/accounts/login/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
             .then(response => {
               console.log(response)
               localStorage.setItem("logInUserId", response.data.user.username); // 현재 로그인한 유저 누군지 설정
@@ -55,7 +46,7 @@ function objToString (obj) {
 
     async function log_out(){  //로그아웃
         let data = {refresh : localStorage.getItem("refresh")} 
-        await axios.post('http://127.0.0.1:8000/accounts/logout/', data)
+        await axios.post('http://192.168.2.7:8000/accounts/logout/', data)
         .then(response => {
             localStorage.clear("logInUserId")
             localStorage.clear("auth")
@@ -72,7 +63,7 @@ function objToString (obj) {
     async function getSecurity() { // json을 받아서 화면에 parsing해주는 함수!
       const username = localStorage.getItem("logInUserId");
       const data = {"username" : username}
-      await axios.post('http://127.0.0.1:8080/securitytxt/', data)
+      await axios.post('http://175.45.201.114:8080/securitytxt/', data)
         .then(response => {
              //let dummyJson =  [{ "hostname": "abc1",  "virus" : "", "virus_sum" : "0" }, {"hostname" : "abc2", "virus" : "virus1,virus2" ,"virus_sum" : "2" }, { "hostname": "abc3", "virus" : "virus3,virus4,virus5", "virus_sum" : "3" }, { "hostname": "abc4", "virus" : "",  "virus_sum" : "0"}]; //더미데이터
              let dummyJson = (response.data);
@@ -116,7 +107,9 @@ function objToString (obj) {
              $("#getSecu").append(aaa) 
              }  
         })
-        .catch(err => { // api 없는 경우를 가정해서 구현하는중
+        .catch(err => { 
+          alert("error가 발생하였습니다. 시작화면으로 돌아갑니다.")
+          window.location.href = '/';
         })
     }
     

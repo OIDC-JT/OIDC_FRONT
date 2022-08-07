@@ -54,7 +54,7 @@ function CreateServer(){
         // let meta_products = JSON.parse(list_data);
         let list_data = {list:list};
        console.log(list_data);
-        await axios.post('http://127.0.0.1:8000/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
+        await axios.post('http://192.168.2.7:8000/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
                 .then(response => { // post 요청을 했는데 return으로 그 결과 값이 전달되어서 GET을 수행하지 않았습니다.
                     console.log(response.data['results']); 
                      for (let i = 0; i < nbpTable; i++) {

@@ -21,7 +21,7 @@ async function makeUser(){ // await 사용하기위해 async 사용
     let list_data = {username:Username, email:Email, password1:Password, password2:PasswordCheck};
     console.log(list_data);
     
-    await axios.post('http://127.0.0.1:8000/accounts/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
+    await axios.post('http://192.168.2.7:8000/accounts/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
             .then(response => {
                 alert('회원가입이 완료되었습니다.');
                 window.location.href = "/Dashboard";

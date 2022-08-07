@@ -24,7 +24,7 @@ let Global_secu_virus_list;
     
     let list_data = {username:Username, email:Email, password:Password};
 
-    await axios.post('http://127.0.0.1:8000/accounts/login/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
+    await axios.post('http://192.168.2.7:8000/accounts/login/', list_data) // post 조건이 완전히 완료될때까지 기다리라는 await
             .then(response => {
               console.log(response)
               localStorage.setItem("logInUserId", response.data.user.username); // 현재 로그인한 유저 누군지 설정
@@ -47,7 +47,7 @@ let Global_secu_virus_list;
 
     async function log_out(){  //로그아웃
         let data = {refresh : localStorage.getItem("refresh")} 
-        await axios.post('http://127.0.0.1:8000/accounts/logout/', data)
+        await axios.post('http://192.168.2.7:8000/accounts/logout/', data)
         .then(response => {
             localStorage.clear("logInUserId")
             localStorage.clear("auth")
